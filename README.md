@@ -39,6 +39,12 @@ and the respective view app/views/home/index.html.erb
 <%= editable_content(:main) %>
 ```
 
+## Why
+
+For those searching for a tiny cms which allows your users to change 
+only the contents (snippets) leaving you, the rails developer and web designer, 
+with your editor (vim?), your rails gems and no web interface.
+
 ## Contributing
 
 1. Fork it
