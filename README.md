@@ -1,6 +1,6 @@
 # Cmsino
 
-Cms rails gem for developers in its smallest form possible.
+Cms rails gem for developers in its smallest form possible. Not usable now :-)
 
 ## Installation
 
@@ -18,11 +18,11 @@ Or install it yourself as:
 
 ## Usage
 
-gem 'cancan' in Gemfile and 
+Add 'cancan' gem in Gemfile and 
+
     $ rails g cancan:ability
 
-
-Example for controller
+Example for a Home controller
 
 ```ruby
 class HomeController < ApplicationController
@@ -32,7 +32,7 @@ class HomeController < ApplicationController
 end
 ```
 
-and view for app/views/home/index.html.erb
+and the respective view app/views/home/index.html.erb
 
 ```rails
 <h2>Main content</h2>
