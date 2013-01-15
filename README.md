@@ -1,6 +1,6 @@
 # Cmsino
 
-Cms rails gem for developers.
+Cms rails gem for developers in its smallest form possible.
 
 ## Installation
 
@@ -34,7 +34,7 @@ end
 
 and view for app/views/home/index.html.erb
 
-```html
+```rails
 <h2>Main content</h2>
 <%= editable_content(:main) %>
 ```
