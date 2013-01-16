@@ -26,5 +26,13 @@ module CmsinoHelper
 </div>|
   end
 
+  def editable_image_content(name)
+    if ! @page
+      raise "FIXME trovare page da snippet name quando possibile"
+    end
+    content = Cmsino::ImageContent.find_or_create_by_page_and_name(@page.name, name)
+    raw %Q|<h4>#{content.title}</h4>
+#{content.text}#{editable_content_link(content)}|
+  end
 end
 

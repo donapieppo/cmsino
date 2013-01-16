@@ -3,6 +3,7 @@ class CreateCmsinoContentSchema < ActiveRecord::Migration
     create_table :cmsino_contents do |t|
       t.string   :page
       t.string   :name
+      t.string   :title
       t.text     :text
       t.string   :type
       t.timestamps
