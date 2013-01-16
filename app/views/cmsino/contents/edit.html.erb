@@ -8,6 +8,6 @@
 <%= @content.inspect %>  
 
 <script type="text/javascript">
-  bkLib.onDomLoaded(function() { nicEditors.allTextAreas({iconsPath : '/dinamici/assets/nicEditorIcons.gif'}) });
+  bkLib.onDomLoaded(function() { nicEditors.allTextAreas({iconsPath : '<%= image_path('nicEditorIcons.gif') %>'}) });
 </script>
 
