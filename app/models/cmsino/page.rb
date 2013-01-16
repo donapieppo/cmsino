@@ -1,15 +1,15 @@
 class Cmsino::Page
 
-  attr_reader :name, :title, :side
+  attr_reader :name, :description
 
   def initialize(name)
-    @conf = YAML.load_file(File.join(Rails.root, "config", "cmsino_pages.yml"))
-    Rails.logger.info(@conf.inspect)
+    # TODO reread in development... only once in production
+    @conf = YAML.load_file(File.join(Rails.root, "config", "cmsino.yml"))
+    Rails.logger.debug(@conf.inspect)
     @snippets = @conf['snippet']
 
-    @name = name # ex description
-    @page = @conf['page'][name.to_s]
-    @page = @page['title']
+    @name = name 
+    @description = @conf['page'][name.to_s]
   end
 
   def content(name)
