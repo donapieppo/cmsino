@@ -1,6 +1,6 @@
 # Cmsino
 
-Cms rails gem for developers in its smallest form possible. Not usable now :-)
+Cms rails gem (Rails Engine) for developers in its smallest form possible. Not usable now :-)
 
 ## Installation
 
@@ -34,10 +34,12 @@ end
 
 and the respective view app/views/home/index.html.erb
 
-```rails
+```erb
 <h2>Main content</h2>
 <%= editable_content(:main) %>
 ```
+
+see https://github.com/donapieppo/cmsino/wiki/Usage for details.
 
 ## Why
 
