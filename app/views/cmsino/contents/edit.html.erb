@@ -1,9 +1,13 @@
 <h2>Editing di <em><%= @content.name %></em> (pagina <%= @content.page %>)</h2>
 
+<% if @content.class == Cmsino::ImageContent %>  
+  <%= image_tag(@content.name, :width => '200px') %>  
+<% end %>
 <%= form_for @content do |c| %>  
   <% if @content.class == Cmsino::ImageContent %>  
-  <%= c.text_field :title %>  
-    <% end %>
+    <%= c.label :title %>  
+    <%= c.text_field :title %>  
+  <% end %>
   <%= c.text_area :text, :cols => 100, :rows => 4 %>  
   <%= c.submit %>  
 <% end %>
