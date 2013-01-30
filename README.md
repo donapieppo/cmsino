@@ -4,23 +4,19 @@ Cms rails gem (Rails Engine) for developers in its smallest form possible. Not u
 
 ## Installation
 
-Add this line to your application's Gemfile:
+Add theses lines to your application's Gemfile:
 
     gem 'cmsino'
+    gem 'cancan'
 
 And then execute:
 
     $ bundle
-
-Or install it yourself as:
-
-    $ gem install cmsino
+    $ rails g cancan:ability
+    $ bunlde exec rake cmsino_engine:install:migrations
+    $ bundel exec rake db:migrate
 
 ## Usage
-
-Add 'cancan' gem in Gemfile and 
-
-    $ rails g cancan:ability
 
 Example for a Home controller
 
@@ -38,6 +34,12 @@ and the respective view app/views/home/index.html.erb
 <h2>Main content</h2>
 <%= editable_content(:main) %>
 ```
+
+When you visit /home for the first time the *content* named
+:main for the page :home
+is created in the database as an empty string.
+When authenticated (see cancan) you get an editable 
+form (a http://nicedit.com/ styled form for now).
 
 see https://github.com/donapieppo/cmsino/wiki/Usage for details.
 
