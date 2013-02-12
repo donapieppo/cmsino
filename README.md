@@ -18,7 +18,24 @@ And then execute:
 
 ## Usage
 
-Example for a Home controller
+Include in app/controllers/application_controller.rb CmsinoHelper and
+for CanCan provide a current_user method in the controller.
+
+For example in app/controllers/application_controller.rb 
+
+```ruby
+class ApplicationController < ActionController::Base
+  include CmsinoHelper
+
+  def current_user
+    User.new(:cmsino_user => session[:cmsino_user])
+  end 
+end
+```
+
+If you want to provide editable content to home#index
+you just add the tag editable_page to 
+app/controllers/home_controller.rb
 
 ```ruby
 class HomeController < ApplicationController
@@ -28,7 +45,7 @@ class HomeController < ApplicationController
 end
 ```
 
-and the respective view app/views/home/index.html.erb
+and editable_content in the view app/views/home/index.html.erb
 
 ```erb
 <h2>Main content</h2>
@@ -36,12 +53,12 @@ and the respective view app/views/home/index.html.erb
 ```
 
 When you visit /home for the first time the *content* named
-:main for the page :home
+:main for the page :home and the locale "I18n.locale"
 is created in the database as an empty string.
 When authenticated (see cancan) you get an editable 
 form (a http://nicedit.com/ styled form for now).
 
-see https://github.com/donapieppo/cmsino/wiki/Usage for details.
+See https://github.com/donapieppo/cmsino/wiki/Usage for details.
 
 ## Why
 
