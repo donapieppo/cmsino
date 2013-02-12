@@ -18,7 +18,7 @@ And then execute:
 
 ## Usage
 
-Include in app/controllers/application_controller.rb CmsinoHelper and
+Include CmsinoHelper in app/controllers/application_controller.rb and
 for CanCan provide a current_user method in the controller.
 
 For example in app/controllers/application_controller.rb 
@@ -34,7 +34,14 @@ end
 ```
 
 If you want to provide editable content to home#index
-you just add the tag editable_page to 
+update the file config/cmsino.yml with 
+
+```yaml
+page:
+  home: Home Page
+```
+
+, then add the tag editable_page to 
 app/controllers/home_controller.rb
 
 ```ruby
