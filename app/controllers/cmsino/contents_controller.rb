@@ -1,7 +1,14 @@
 class Cmsino::ContentsController < ApplicationController
+  load_and_authorize_resource :class => Cmsino::Content
 
   def index
-    @contents = Cmsino::Content.all
+    # authorize! :index, Cmsino::Content
+    @contents = Hash.new
+    Cmsino::Content.order([:page, :name, :locale]).each do |c|
+      @contents[c.page] ||= Hash.new
+      @contents[c.page][c.name] ||= Hash.new
+      @contents[c.page][c.name][c.locale] = c
+    end
   end
 
   def edit
