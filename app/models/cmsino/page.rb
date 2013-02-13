@@ -1,5 +1,4 @@
 class Cmsino::Page
-
   attr_reader :name, :description
 
   def initialize(name)
@@ -12,8 +11,8 @@ class Cmsino::Page
     @description = @conf['page'][name.to_s]
   end
 
-  def content(name)
-    Cmsino::Content.find_or_create_by_page_and_name(@name, name)
+  def content(name, locale)
+    Cmsino::Content.find_or_create_by_page_and_name_and_locale(@name, name, locale)
   end
 
 end
