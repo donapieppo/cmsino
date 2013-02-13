@@ -1,5 +1,14 @@
-<ul>
-  <% @contents.each do |content| %>  
-    <li><%= content.inspect %>  </li>
+<h1>Contents</h1>
+
+<% @contents.each_key do |page| %>  
+  <% @contents[page].each_key do |name| %>  
+    <h2><%= page %> :  <%= name %></h2>
+    <% @contents[page][name].each_key do |locale| %>  
+      <h3><%= locale %></h3>
+      <p>
+      titolo: ``<%= @contents[page][name][locale][:title] %> ''<br/> 
+      <%= @contents[page][name][locale][:text] %>  
+      </p>
+    <% end %>
   <% end %>
-</ul>
+<% end %>
