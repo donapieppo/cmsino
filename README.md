@@ -1,6 +1,7 @@
 # Cmsino
 
-Cms rails gem (Rails Engine) for developers in its smallest form possible. Not usable now :-)
+Cms rails gem (Rails Engine) for developers in its smallest form possible. Not usable now unless
+you want to help developing :-)
 
 ## Installation
 
@@ -18,10 +19,10 @@ And then execute:
 
 ## Usage
 
-Include CmsinoHelper in app/controllers/application_controller.rb and
-for CanCan provide a current_user method in the controller.
+Include `CmsinoHelper` in `app/controllers/application_controller.rb` and
+for `CanCan` provide a `current_user` method in the controller.
 
-For example in app/controllers/application_controller.rb 
+For example in `app/controllers/application_controller.rb`
 
 ```ruby
 class ApplicationController < ActionController::Base
