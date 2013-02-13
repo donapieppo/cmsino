@@ -14,13 +14,14 @@ And then execute:
 
     $ bundle
     $ rails g cancan:ability
-    $ bunlde exec rake cmsino_engine:install:migrations
-    $ bundel exec rake db:migrate
+    $ bundle exec rake cmsino_engine:install:migrations
+    $ bundle exec rake db:migrate
 
 ## Usage
 
 Include `CmsinoHelper` in `app/controllers/application_controller.rb` and
-for `CanCan` provide a `current_user` method in the controller.
+for `CanCan` provide a `current_user` method in the controller and give 
+ability to manage Cmsino::Content.
 
 For example in `app/controllers/application_controller.rb`
 
