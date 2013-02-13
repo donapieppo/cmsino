@@ -4,9 +4,9 @@
   <% @contents[page].each_key do |name| %>  
     <h2><%= page %> :  <%= name %></h2>
     <% @contents[page][name].each_key do |locale| %>  
-      <h3><%= locale %></h3>
+      <p><%= locale %> <%= link_to "<i class='icon-edit'></i>".html_safe, edit_cmsino_content_path(@contents[page][name][locale]) %></p>
       <p>
-      titolo: ``<%= @contents[page][name][locale][:title] %> ''<br/> 
+      title: <%= @contents[page][name][locale][:title] %> <br/> 
       <%= @contents[page][name][locale][:text] %>  
       </p>
     <% end %>
