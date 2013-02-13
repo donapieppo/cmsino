@@ -1,7 +1,7 @@
 # Cmsino
 
 Cms rails gem (Rails Engine) for developers in its smallest form possible. Not usable now unless
-you want to help developing :-)
+you want to **help** developing :-)
 
 ## Installation
 
@@ -42,7 +42,7 @@ page:
   home: Home Page
 ```
 
-, then add the tag `editable_page` to 
+add the tag `editable_page` to 
 `app/controllers/home_controller.rb`
 
 ```ruby
