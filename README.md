@@ -34,16 +34,16 @@ class ApplicationController < ActionController::Base
 end
 ```
 
-If you want to provide editable content to home#index
-update the file config/cmsino.yml with 
+If you want to provide editable content to `home#index`
+update the file `config/cmsino.yml` with 
 
 ```yaml
 page:
   home: Home Page
 ```
 
-, then add the tag editable_page to 
-app/controllers/home_controller.rb
+, then add the tag `editable_page` to 
+`app/controllers/home_controller.rb`
 
 ```ruby
 class HomeController < ApplicationController
@@ -53,7 +53,7 @@ class HomeController < ApplicationController
 end
 ```
 
-and editable_content in the view app/views/home/index.html.erb
+and `editable_content` in the view `app/views/home/index.html.erb`
 
 ```erb
 <h2>Main content</h2>
@@ -63,6 +63,7 @@ and editable_content in the view app/views/home/index.html.erb
 When you visit /home for the first time the *content* named
 :main for the page :home and the locale "I18n.locale"
 is created in the database as an empty string.
+
 When authenticated (see cancan) you get an editable 
 form (a http://nicedit.com/ styled form for now).
 
