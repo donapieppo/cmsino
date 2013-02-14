@@ -35,6 +35,15 @@ class ApplicationController < ActionController::Base
 end
 ```
 
+and in `app/models/ability.rb`
+
+```ruby
+  [...]
+    can :manage, Cmsino::Content
+
+```
+
+
 If you want to provide editable content to `home#index`
 update the file `config/cmsino.yml` with 
 
