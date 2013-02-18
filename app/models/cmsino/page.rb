@@ -1,19 +1,16 @@
 class Cmsino::Page
-  attr_reader :name, :description
+  attr_reader :name, :description, :locales
 
   def initialize(name)
-    # TODO reread in development... only once in production
-    @conf = YAML.load_file(File.join(Rails.root, "config", "cmsino.yml"))
-    Rails.logger.debug(@conf.inspect)
-    @snippets = @conf['snippet']
-
-    @name = name 
-    @description = @conf['page'][name.to_s]
+    @name = name
+    @conf = Cmsino::Conf.new
+    Rails.logger.info(@conf.inspect)
+    @description = @conf.page(name)
+    @locales = @conf.locales
   end
 
   def content(name, locale)
     Cmsino::Content.find_or_create_by_page_and_name_and_locale(@name, name, locale)
   end
-
 end
 
