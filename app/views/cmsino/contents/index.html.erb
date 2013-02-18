@@ -3,12 +3,18 @@
 <% @contents.each_key do |page| %>  
   <% @contents[page].each_key do |name| %>  
     <h2><%= page %> :  <%= name %></h2>
-    <% @contents[page][name].each_key do |locale| %>  
-      <p><%= locale %> <%= link_to "<i class='icon-edit'></i>".html_safe, edit_cmsino_content_path(@contents[page][name][locale]) %></p>
+    <% @locales.each do |locale| %>  
       <p>
-      title: <%= @contents[page][name][locale][:title] %> <br/> 
-      <%= @contents[page][name][locale][:text] %>  
+        <strong><%= locale %></strong>
+        <%= page %>  <%= name %>  <%= locale %>  
+        <% if @contents[page][name][locale] %>  
+          <%= link_to "<i class='icon-edit'></i>".html_safe, edit_cmsino_content_path(@contents[page][name][locale]) %>
+            title: <%= @contents[page][name][locale][:title] %> <br/> 
+            <%= @contents[page][name][locale][:text] %>  
+        <% else %>  
+          <%= link_to 'create', new_cmsino_content_path(:page => page, :name => name) %>  
+        <% end %>
       </p>
+      <% end %>
     <% end %>
   <% end %>
-<% end %>

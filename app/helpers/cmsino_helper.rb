@@ -16,11 +16,13 @@ module CmsinoHelper
 
   # display the current content. Eventually creates it if content with the
   # name doesen't exists. 
-  def editable_content(name)
-    if ! @cmsino_page
+  # Can pass page_name (example editable_content(:main, :home)
+  def editable_content(name, page = nil)
+    page = page ? Cmsino::Page.new(page) : @cmsino_page
+    if ! page
       raise "FIXME trovare cmsino_page da snippet name quando possibile"
     end
-    content = Cmsino::Content.find_or_create_by_page_and_name_and_locale(@cmsino_page.name, name, I18n.locale)
+    content = Cmsino::Content.find_or_create_by_page_and_name_and_locale(page.name, name, I18n.locale)
     raw %Q|<div id="#{content.div_id}">
 #{content.text}#{editable_content_link(content)}
 </div>|

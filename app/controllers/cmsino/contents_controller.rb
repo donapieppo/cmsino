@@ -3,11 +3,22 @@ class Cmsino::ContentsController < ApplicationController
 
   def index
     @contents = Hash.new
+    @locales = Cmsino::Conf.new.locales
     Cmsino::Content.order([:page, :name, :locale]).each do |c|
       @contents[c.page] ||= Hash.new
       @contents[c.page][c.name] ||= Hash.new
       @contents[c.page][c.name][c.locale] = c
     end
+  end
+
+  def new 
+    @content = Cmsino::Content.new
+    render :action => :edit
+  end
+
+  def create
+    @content = Cmsino::Content.new(params[:cmsino_content])
+    raise @content.inspect
   end
 
   def edit

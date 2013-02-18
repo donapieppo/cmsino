@@ -1,4 +1,4 @@
-<h2>Editing di <em><%= @content.name %></em> (pagina <%= @content.page %>)</h2>
+<h2>Editing di <em><%= @content.name %></em> (pagina <%= @content.page %> in locale <%= @content.locale %>)</h2>
 
 <% if @content.class == Cmsino::ImageContent %>  
   <%= image_tag(@content.name, :width => '200px') %>  
