@@ -12,13 +12,21 @@ class Cmsino::ContentsController < ApplicationController
   end
 
   def new 
-    @content = Cmsino::Content.new
+    @content = Cmsino::Content.new(:page => params[:page], 
+                                   :name => params[:name],
+                                   :locale => params[:locale])
     render :action => :edit
   end
 
+  # "cmsino_content"=>{"page"=>"page_name", "name"=>"content_name", "locale"=>"en", "text"=>"<p>my text</p>"}
   def create
     @content = Cmsino::Content.new(params[:cmsino_content])
-    raise @content.inspect
+    if @content.save
+      flash_notice = "OK"
+      redirect_to :action => :index
+    else
+      render :action => :edit
+    end
   end
 
   def edit

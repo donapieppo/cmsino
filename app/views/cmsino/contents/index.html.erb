@@ -2,19 +2,19 @@
 
 <% @contents.each_key do |page| %>  
   <% @contents[page].each_key do |name| %>  
-    <h2><%= page %> :  <%= name %></h2>
-    <% @locales.each do |locale| %>  
-      <p>
-        <strong><%= locale %></strong>
-        <%= page %>  <%= name %>  <%= locale %>  
-        <% if @contents[page][name][locale] %>  
-          <%= link_to "<i class='icon-edit'></i>".html_safe, edit_cmsino_content_path(@contents[page][name][locale]) %>
-            title: <%= @contents[page][name][locale][:title] %> <br/> 
+    <div style="border: 1px solid">
+      <p><strong><%= page %> > <%= name %></strong></p>
+      <% @locales.each do |locale| %>  
+          <%= locale %>
+          <%= link_to "<i class='icon-edit'></i>".html_safe, @contents[page][name][locale] ? edit_cmsino_content_path(@contents[page][name][locale]) : new_cmsino_content_path(:page => page, :name => name, :locale => locale) %><br/>
+          <div style="background-color: #eee">
+          <% if @contents[page][name][locale] %>  
             <%= @contents[page][name][locale][:text] %>  
-        <% else %>  
-          <%= link_to 'create', new_cmsino_content_path(:page => page, :name => name) %>  
-        <% end %>
-      </p>
+          <% else %>  
+            -
+          <% end %>
+        </div>
       <% end %>
-    <% end %>
+    </div>
   <% end %>
+<% end %>
