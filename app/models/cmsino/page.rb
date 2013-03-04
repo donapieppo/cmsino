@@ -12,5 +12,9 @@ class Cmsino::Page
   def content(name, locale)
     Cmsino::Content.find_or_create_by_page_and_name_and_locale(@name, name, locale)
   end
+
+  def self.description(name)
+    Cmsino::Conf.new.page(name)
+  end
 end
 
