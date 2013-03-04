@@ -1,20 +1,31 @@
 <h1>Contents</h1>
 
-<% @contents.each_key do |page| %>  
-  <% @contents[page].each_key do |name| %>  
-    <div style="border: 1px solid">
-      <p><strong><%= page %> > <%= name %></strong></p>
-      <% @locales.each do |locale| %>  
-          <%= locale %>
-          <%= link_to "<i class='icon-edit'></i>".html_safe, @contents[page][name][locale] ? edit_cmsino_content_path(@contents[page][name][locale]) : new_cmsino_content_path(:page => page, :name => name, :locale => locale) %><br/>
-          <div style="background-color: #eee">
-          <% if @contents[page][name][locale] %>  
-            <%= @contents[page][name][locale][:text] %>  
-          <% else %>  
-            -
-          <% end %>
-        </div>
-      <% end %>
-    </div>
+<div class="accordion" id="pages">
+  <% @contents.each_key do |page| %>  
+    <div class="accordion-group">
+      <div class="accordion-heading">
+        <a class="accordion-toggle" data-toggle="collapse" data-parent="#pages" href="#<%= page %>">
+          <strong><%= Cmsino::Page.description(page) %></strong>
+        </a>
+      </div><!-- accordion-heading -->
+      <div id="<%= page %>" class="accordion-body collapse">
+        <div class="accordion-inner">
+          <% @contents[page].each_key do |name| %>  
+            <p><strong><%= name %></strong></p>
+            <% @locales.each do |locale| %>  
+              <%= locale %>
+              <%= link_to "<i class='icon-edit'></i>".html_safe, @contents[page][name][locale] ? edit_cmsino_content_path(@contents[page][name][locale]) : new_cmsino_content_path(:page => page, :name => name, :locale => locale) %><br/>
+              <div style="background-color: #eee">
+                <% if @contents[page][name][locale] %>  
+                  <%= @contents[page][name][locale][:text] %>  
+                <% else %>  
+                  -
+                <% end %>
+              </div>
+            <% end %>
+        <% end %>
+          </div>
+      </div>
+    </div><!-- accordion-group -->  
   <% end %>
-<% end %>
+</div>
