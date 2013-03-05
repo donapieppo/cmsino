@@ -15,6 +15,7 @@ class Cmsino::ContentsController < ApplicationController
     @content = Cmsino::Content.new(:page => params[:page], 
                                    :name => params[:name],
                                    :locale => params[:locale])
+    @other_contents = Cmsino::Content.where(:page => @content.page, :name => @content.name)
     render :action => :edit
   end
 
@@ -32,7 +33,7 @@ class Cmsino::ContentsController < ApplicationController
   def edit
     session[:cmsino_from] = env["HTTP_REFERER"]
     @content = Cmsino::Content.find(params[:id])
-    @other_contents = Cmsino::Content.where(:page => @content.page, :name => @content.name).all
+    @other_contents = Cmsino::Content.where(:page => @content.page, :name => @content.name)
   end
 
   def update

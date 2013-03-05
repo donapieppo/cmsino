@@ -8,6 +8,6 @@ class Cmsino::Content < ActiveRecord::Base
   validates_uniqueness_of :name, :scope => [:page, :locale]
 
   def div_id
-    "content_#{@page}_#{@name}"
+    "content_#{self.page}_#{self.name}"
   end
 end
