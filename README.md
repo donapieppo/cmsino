@@ -85,6 +85,8 @@ For those searching for a tiny cms which allows your users to change
 only the contents (snippets) leaving you, the rails developer and web designer, 
 with your editor (vim?), your rails gems and no web interface.
 
+When https://github.com/geraudmathe/Locomotive-fundamentals says "Developing a LocomotiveCMS site should not require Ruby on Rails knowledge" we say "Developing site with Cmsino require Ruby on Rails knowledge". 
+
 ## Contributing
 
 1. Fork it
