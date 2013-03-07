@@ -19,7 +19,11 @@
               <% else %>  
                 -
               <% end %>
-              <%= link_to "<i class='icon-edit'></i>".html_safe, @contents[page][name][locale] ? edit_cmsino_content_path(@contents[page][name][locale]) : new_cmsino_content_path(:page => page, :name => name, :locale => locale) %><br/>
+              <%= link_to "<i class='icon-edit'></i>".html_safe, @contents[page][name][locale] ? edit_cmsino_content_path(@contents[page][name][locale]) : new_cmsino_content_path(:page => page, :name => name, :locale => locale) %>
+              <% if @contents[page][name][locale] %>
+                <%= link_to "<i class='icon-trash'></i>".html_safe, cmsino_content_path(@contents[page][name][locale]), :method => :delete %>
+              <% end %>
+              <br/>
             <% end %>
           </div><!-- accordion-inner -->
         </div><!-- accordion-body -->

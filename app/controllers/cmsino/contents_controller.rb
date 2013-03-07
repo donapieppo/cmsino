@@ -15,7 +15,8 @@ class Cmsino::ContentsController < ApplicationController
     @content = Cmsino::Content.new(:page => params[:page], 
                                    :name => params[:name],
                                    :locale => params[:locale])
-    @other_contents = Cmsino::Content.where(:page => @content.page, :name => @content.name)
+    @other_contents = Cmsino::Content.where(:page => @content.page, 
+                                            :name => @content.name)
     render :action => :edit
   end
 
@@ -39,6 +40,12 @@ class Cmsino::ContentsController < ApplicationController
   def update
     @content = Cmsino::Content.find(params[:id])
     @content.update_attribute(:text, params[:cmsino_content][:text])
+    redirect_to session[:cmsino_from]
+  end
+
+  def destroy
+    @content = Cmsino::Content.find(params[:id])
+    @content.destroy
     redirect_to session[:cmsino_from]
   end
 

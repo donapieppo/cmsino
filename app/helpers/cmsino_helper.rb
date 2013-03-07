@@ -8,7 +8,7 @@ module CmsinoHelper
   # display the 'edit' link if user has the rights
   def editable_content_link(content)
     if can? :update, content 
-      %Q|<span><a href="#{edit_cmsino_content_path(content)}">edit</a></span> |
+      %Q|<span><a href="#{edit_cmsino_content_path(content)}">edit</a></span>|
     else
       ""
     end
