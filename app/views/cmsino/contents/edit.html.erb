@@ -16,10 +16,12 @@
   <%= c.submit %>  
 <% end %>
 
-<% @other_contents.each do |c| %>
-  <p><span class="badge badge-info" style="width: 25px; text-align: center"><%= c.locale %></span>
-     <span class="alert alert-info"><%= c.text %></span></p>
-<% end %>
+<div class="row">
+  <% @other_contents.each do |c| %>
+    <div class="span1"><span class="badge badge-info" style="width: 25px; text-align: center"><%= c.locale %></span></div>
+    <div class="span11"><div class="alert alert-info"><%= c.text %></div></div>
+  <% end %>
+</div>
 
 <%= @content.inspect %>  
 
