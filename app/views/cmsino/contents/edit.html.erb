@@ -17,8 +17,8 @@
 <% end %>
 
 <% @other_contents.each do |c| %>
-  <p><strong><%= c.locale %></strong></p>
-  <p>|<%= c.text %>|</p>
+  <p><span class="badge badge-info" style="width: 25px; text-align: center"><%= c.locale %></span>
+     <span class="alert alert-info"><%= c.text %></span></p>
 <% end %>
 
 <%= @content.inspect %>  
