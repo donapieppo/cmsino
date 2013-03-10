@@ -43,6 +43,9 @@ and in `app/models/ability.rb`
 
 ```
 
+Of course in real cases you use something like 
+https://github.com/plataformatec/devise to handle
+current_user
 
 If you want to provide editable content to `home#index`
 update the file `config/cmsino.yml` with 
