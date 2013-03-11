@@ -80,7 +80,8 @@ is created in the database as an empty string.
 When authenticated (see cancan) you get an editable 
 form (a http://nicedit.com/ styled form for now).
 
-See https://github.com/donapieppo/cmsino/wiki/Usage for details.
+See https://github.com/donapieppo/cmsino/wiki/Usage for details
+and https://github.com/donapieppo/cmsino-example for example.
 
 ## Why
 
