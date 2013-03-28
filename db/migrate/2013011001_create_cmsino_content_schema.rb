@@ -9,6 +9,8 @@ class CreateCmsinoContentSchema < ActiveRecord::Migration
       t.string   :locale
       t.string   :title
       t.text     :text
+      t.datetime :from
+      t.datetime :to
       t.string   :type
       t.timestamps
     end

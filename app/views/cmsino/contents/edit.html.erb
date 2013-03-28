@@ -12,7 +12,8 @@
     <%= c.label :title %>  
     <%= c.text_field :title %>  
   <% end %>
-  <%= c.text_area :text, :cols => 100, :rows => 4 %>  
+  <%= c.text_area :text, :rows => 4, :style => "width: 810px; height: 200px" %>  
+  <br/>
   <%= c.submit %>  
 <% end %>
 
@@ -26,6 +27,10 @@
 <%= @content.inspect %>  
 
 <script type="text/javascript">
-  bkLib.onDomLoaded(function() { nicEditors.allTextAreas({iconsPath : '<%= image_path('nicEditorIcons.gif') %>'}) });
+  $('#cmsino_content_text').wysihtml5({"stylesheets": [], "html": true,});
 </script>
 
+
+<!-- 
+  bkLib.onDomLoaded(function() { nicEditors.allTextAreas({iconsPath : '<%= image_path('nicEditorIcons.gif') %>'}) });
+  -->
