@@ -7,7 +7,11 @@ class Cmsino::Content < ActiveRecord::Base
 
   validates_uniqueness_of :name, :scope => [:page, :locale]
 
+  def self.div_id(p, n)
+    "content_#{p}_#{n}"
+  end
+
   def div_id
-    "content_#{self.page}_#{self.name}"
+    Cmsino::Content.div_id(self.page, self.name)
   end
 end

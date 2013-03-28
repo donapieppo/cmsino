@@ -1,4 +1,8 @@
-<h2><%= @content.page %> > <em><%= @content.name %></em> > <%= @content.locale %></h2>
+<ul class="breadcrumb">
+  <li><%= @content.page %> <span class="divider">/</span></li>
+  <li><em><%= @content.name %></em> <span class="divider">/</span></li>
+  <li><%= @content.locale %></li>
+</ul>
 
 <% if @content.class == Cmsino::ImageContent %>  
   <%= image_tag(@content.name, :width => '200px') %>  
@@ -18,8 +22,13 @@
 <% end %>
 
 <div class="row">
-  <% @other_contents.each do |c| %>
-    <div class="span1"><span class="badge badge-info" style="width: 25px; text-align: center"><%= c.locale %></span></div>
+  <% @all_contents.each do |c| %>
+    <div class="span1">
+      <span class="badge badge-info" style="width: 25px; text-align: center"><%= c.locale %></span>
+      <% if c.locale != @content.locale %>
+        <%= raw editable_content_link(c) %>
+      <% end %>
+    </div>
     <div class="span11"><div class="alert alert-info"><%= c.text %></div></div>
   <% end %>
 </div>

@@ -6,11 +6,12 @@
       <div class="accordion-group">
         <div class="accordion-heading">
           <%# FIXME use some id or check security in page name %>
-          <a class="accordion-toggle" data-toggle="collapse" data-parent="#pages" href="#<%= page %><%= name %>">
+          <a class="accordion-toggle" data-toggle="collapse" data-parent="#pages" href="#<%= Cmsino::Content.div_id(page, name) %>">
             <strong><%= Cmsino::Page.description(page) %></strong> > <strong><%= name %></strong>
           </a>
         </div><!-- accordion-heading -->
-        <div id="<%= page %><%= name %>" class="accordion-body collapse">
+        <% in_class = (@last_edited == Cmsino::Content.div_id(page, name)) ? 'in' : '' %>
+        <div id="<%= Cmsino::Content.div_id(page, name) %>" class="accordion-body collapse <%= in_class %>">
           <div class="accordion-inner">
             <% @locales.each do |locale| %>  
               <span class="badge badge-info" style="width: 25px; text-align: center"><%= locale %></span>
