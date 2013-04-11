@@ -78,7 +78,7 @@ When you visit /home for the first time the *content* named
 is created in the database as an empty string.
 
 When authenticated (see cancan) you get an editable 
-form (a http://nicedit.com/ styled form for now).
+form (a http://xing.github.io/wysihtml5 styled form for now).
 
 See https://github.com/donapieppo/cmsino/wiki/Usage for details
 and https://github.com/donapieppo/cmsino-example for example.
@@ -90,6 +90,13 @@ only the contents (snippets) leaving you, the rails developer and web designer,
 with your editor (vim?), your rails gems and no web interface.
 
 When https://github.com/geraudmathe/Locomotive-fundamentals says "Developing a LocomotiveCMS site should not require Ruby on Rails knowledge" we say "Developing site with Cmsino require Ruby on Rails knowledge". 
+
+## TODO
+
+Use https://github.com/flavorjones/loofah for cleaning html posted by authenticated
+user.
+
+Remove dependecies from bootstrap.
 
 ## Contributing
 
