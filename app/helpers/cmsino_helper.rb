@@ -23,7 +23,7 @@ module CmsinoHelper
     if ! page
       raise "FIXME trovare cmsino_page da snippet name quando possibile"
     end
-    content = Cmsino::Content.find_or_create_by_page_and_name_and_locale(page.name, name, I18n.locale)
+    content = Cmsino::Content.find_or_create_by(:page => page.name, :name => name, :locale => I18n.locale)
     raw %Q|<div id="#{content.div_id}">
 #{content.text}#{editable_content_link(content)}
 </div>|
@@ -33,7 +33,7 @@ module CmsinoHelper
     if ! @cmsino_page
       raise "FIXME trovare cmsino_page da snippet name quando possibile"
     end
-    content = Cmsino::ImageContent.find_or_create_by_page_and_name_and_locale(@cmsino_page.name, name, I18n.locale)
+    content = Cmsino::ImageContent.find_or_create_by(:page => @cmsino_page.name, :name => name, :locale => I18n.locale)
     raw %Q|<h4>#{content.title}</h4>
 #{content.text}#{editable_content_link(content)}|
   end
