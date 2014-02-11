@@ -23,7 +23,7 @@ class Cmsino::ContentsController < ApplicationController
 
   # "cmsino_content"=>{"page"=>"page_name", "name"=>"content_name", "locale"=>"en", "text"=>"<p>my text</p>"}
   def create
-    @content = Cmsino::Content.new(params[:cmsino_content])
+    @content = Cmsino::Content.new(cmsino_content_params)
     session[:cmsino_last] = @content.div_id
     if @content.save
       flash_notice = "OK"
@@ -51,5 +51,12 @@ class Cmsino::ContentsController < ApplicationController
     @content.destroy
     redirect_to session[:cmsino_from]
   end
+
+  private
+
+  def cmsino_content_params
+    params.require(:cmsino_content).permit(:page, :name, :locale, :text)
+  end
+
 
 end
