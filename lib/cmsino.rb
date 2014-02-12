@@ -10,3 +10,5 @@ module Cmsino
     end
   end
 end
+
+require "cmsino/conf"
