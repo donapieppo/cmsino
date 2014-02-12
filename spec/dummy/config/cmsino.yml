@@ -1,0 +1,7 @@
+locales:
+  [it, en]
+page:
+  layout: Layout
+  home: Home Page
+  helps: Help Page
+
