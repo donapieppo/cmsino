@@ -1,7 +1,5 @@
-locales:
-  [it, en]
-page:
-  layout: Layout
-  home: Home Page
-  helps: Help Page
+layout: Layout
+home: Home Page
+helps: Help Page
+pippo: Pippo Description
 
