@@ -16,7 +16,7 @@ module Cmsino
       @pages = YAML.load_file(File.join(Rails.root, "config", "cmsino.yml"))
     end
 
-    def page(name)
+    def page_description(name)
       @pages[name]
     end
      

@@ -3,23 +3,25 @@ class Cmsino::Page
 
   def initialize(name)
     @name = name
-    @description = @conf.page(name)
+    @cmsino_conf = Cmsino::Conf.instance
+    @description = @cmsino_conf.page_description(name)
   end
 
   def content(name, locale)
-    Cmsino::Content.find_or_create_by(:page => @name, :name => name, validate_locale(locale))
+    Cmsino::Content.find_or_create_by(:page => @name, :name => name, :locale => validate_locale(locale))
   end
 
   def image_content(name)
     Cmsino::ImageContent.find_or_create_by(:page => @name, :name => name)
   end
 
-  def self.description(name)
-    Cmsino::Conf.instance.page(name)
+  def validate_locale(locale)
+    @cmsino_conf.locales.include?(locale) ? locale : 'en'
   end
 
-  def validate_locale(locale)
-    Cmsino::Conf.locales.include?(locale) ? locale : 'en'
+  def self.description(name)
+    Cmsino::Conf.instance.pages[name]
   end
+
 end
 

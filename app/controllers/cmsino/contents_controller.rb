@@ -3,7 +3,7 @@ class Cmsino::ContentsController < ApplicationController
 
   def index
     @contents = Hash.new
-    @locales = Cmsino::Conf.new.locales
+    @locales = Cmsino::Conf.instance.locales
     Cmsino::Content.order([:page, :name, :locale]).each do |c|
       @contents[c.page] ||= Hash.new
       @contents[c.page][c.name] ||= Hash.new
