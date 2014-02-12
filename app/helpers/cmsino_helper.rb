@@ -1,5 +1,4 @@
 module CmsinoHelper
-
   # in controller and view you have now @cmsino_page
   def editable_page(name)
     @cmsino_page = Cmsino::Page.new(name)
