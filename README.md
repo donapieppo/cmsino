@@ -17,6 +17,12 @@ And then execute:
     $ bundle exec rake cmsino_engine:install:migrations
     $ bundle exec rake db:migrate
 
+To configure use `config/initializers/cmsino.rb` as
+
+    $Cmsino::Conf.setup do |config|
+    $  config.locales = ['it', 'en', 'es']
+    $end
+
 ## Usage
 
 Include `CmsinoHelper` in `app/controllers/application_controller.rb` and
