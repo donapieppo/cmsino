@@ -4,16 +4,6 @@ module CmsinoHelper
     @cmsino_page = Cmsino::Page.new(name)
   end
 
-  # display the 'edit' link if user has the rights
-  def editable_content_link(content)
-    if can? :update, content 
-      # %Q|<span><a href="#{edit_cmsino_content_path(content)}">edit</a></span>|
-      %Q|<span><a href="#{edit_cmsino_content_path(content)}"><i class='icon-edit'></i></a></span>|
-    else
-      ""
-    end
-  end
-
   # display the current content. Eventually creates it if content with the
   # name and locale doesen't exists. 
   # Can pass page_name (example editable_content(:main, :home)
@@ -23,9 +13,13 @@ module CmsinoHelper
       raise "FIXME trovare cmsino_page da snippet name quando possibile"
     end
     content = page.content(name, I18n.locale)
-    raw %Q|<div id="#{content.div_id}">
-#{content.text}#{editable_content_link(content)}
-</div>|
+    editable_tags = ''
+    visible_content = content.text
+    if can?(:update, content) 
+      editable_tags = %Q|class="cmsino_editable" data-editor="#{edit_cmsino_content_path(content)}"|
+      visible_content = 'edit me' if content.text.blank?
+    end
+    raw %Q|<div #{editable_tags} id="#{content.div_id}">#{visible_content}</div>|
   end
 
   def editable_image_content(name, page = nil)
@@ -34,8 +28,7 @@ module CmsinoHelper
       raise "FIXME trovare cmsino_page da snippet name quando possibile"
     end
     image_content = page.image_content(name)
-    raw %Q|<h4>#{content.title}</h4>
-#{content.text}#{editable_content_link(content)}|
+    raw %Q|<h4>#{content.title}</h4>#{content.text}|
   end
 
 end

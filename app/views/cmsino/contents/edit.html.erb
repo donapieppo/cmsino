@@ -26,7 +26,7 @@
     <div class="span1">
       <span class="badge badge-info" style="width: 25px; text-align: center"><%= c.locale %></span>
       <% if c.locale != @content.locale %>
-        <%= raw editable_content_link(c) %>
+        <%= link_to 'edit', edit_cmsino_content_path(c) %>
       <% end %>
     </div>
     <div class="span11"><div class="alert alert-info"><%= c.text %></div></div>

@@ -3,8 +3,7 @@ require "cmsino/conf"
 
 module Cmsino
   class Engine < Rails::Engine
-    # TODO 
-    # enable. Fix problems with routes
+    # http://edgeapi.rubyonrails.org/classes/Rails/Engine.html
     # isolate_namespace Cmsino
 
     config.generators do |g|
