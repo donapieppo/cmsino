@@ -16,7 +16,7 @@ class Cmsino::Page
   end
 
   def validate_locale(locale)
-    @cmsino_conf.locales.include?(locale) ? locale : 'en'
+    @cmsino_conf.locales.include?(locale.to_s) ? locale.to_s : 'en'
   end
 
   def self.description(name)
