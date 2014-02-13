@@ -19,9 +19,9 @@ And then execute:
 
 To configure use `config/initializers/cmsino.rb` as
 
-    $Cmsino::Conf.setup do |config|
-    $  config.locales = ['it', 'en', 'es']
-    $end
+    Cmsino::Conf.setup do |config|
+      config.locales = ['it', 'en', 'es']
+    end
 
 ## Usage
 
