@@ -4,10 +4,10 @@ class Cmsino::ContentsController < ApplicationController
   def index
     @contents = Hash.new
     @locales = Cmsino::Conf.instance.locales
-    Cmsino::Content.order([:page, :name, :locale]).each do |c|
-      @contents[c.page] ||= Hash.new
-      @contents[c.page][c.name] ||= Hash.new
-      @contents[c.page][c.name][c.locale] = c
+    Cmsino::Content.order([:page, :name, :locale]).each do |content|
+      @contents[content.page] ||= Hash.new
+      @contents[content.page][content.name] ||= Hash.new
+      @contents[content.page][content.name][content.locale] = content
     end
     @last_edited = session[:cmsino_last]
   end

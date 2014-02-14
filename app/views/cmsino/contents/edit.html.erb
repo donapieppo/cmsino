@@ -1,6 +1,6 @@
 <ul class="breadcrumb">
   <li><%= @content.page %> <span class="divider">/</span></li>
-  <li><em><%= @content.name %></em> <span class="divider">/</span></li>
+  <li><%= @content.name %> <span class="divider">/</span></li>
   <li><%= @content.locale %></li>
 </ul>
 
@@ -8,28 +8,29 @@
   <%= image_tag(@content.name, :width => '200px') %>  
 <% end %>
 
-<%= form_for @content do |c| %>  
-  <%= c.hidden_field :page %>  
-  <%= c.hidden_field :name %>  
-  <%= c.hidden_field :locale %>  
+<%= form_for @content do |content| %>  
+  <%= content.hidden_field :page %>  
+  <%= content.hidden_field :name %>  
+  <%= content.hidden_field :locale %>  
   <% if @content.class == Cmsino::ImageContent %>  
-    <%= c.label :title %>  
-    <%= c.text_field :title %>  
+    <%= content.label :title %>  
+    <%= content.text_field :title %>  
   <% end %>
-  <%= c.text_area :text, :rows => 4, :style => "width: 810px; height: 200px" %>  
-  <br/>
-  <%= c.submit %>  
+  <div>
+    <%= content.text_area :text, :rows => 4, :style => "width: 810px; height: 200px" %>  
+  </div>
+  <%= content.submit %>  
 <% end %>
 
 <div class="row">
-  <% @all_contents.each do |c| %>
+  <% @all_contents.each do |content| %>
     <div class="span1">
-      <span class="badge badge-info" style="width: 25px; text-align: center"><%= c.locale %></span>
-      <% if c.locale != @content.locale %>
-        <%= link_to 'edit', edit_cmsino_content_path(c) %>
+      <span class="badge badge-info" style="width: 25px; text-align: center"><%= content.locale %></span>
+      <% if content.locale != @content.locale %>
+        <%= link_to 'edit', edit_cmsino_content_path(content) %>
       <% end %>
     </div>
-    <div class="span11"><div class="alert alert-info"><%= c.text %></div></div>
+    <div class="span11"><div class="alert alert-info"><%= content.text %></div></div>
   <% end %>
 </div>
 

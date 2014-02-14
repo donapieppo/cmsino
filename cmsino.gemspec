@@ -19,7 +19,6 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_dependency "rails", "~> 4.0.2"
-  spec.add_dependency 'cancan'
   
   spec.add_development_dependency "sqlite3"
   spec.add_development_dependency 'rspec-rails'
