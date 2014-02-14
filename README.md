@@ -23,6 +23,9 @@ To configure use `config/initializers/cmsino.rb` as
       config.locales = ['it', 'en', 'es']
     end
 
+Cmsino gets the locale from I18n.locale. You can see http://guides.rubyonrails.org/i18n.html
+for Rails Internationalization.
+
 ## Usage
 
 Include `CmsinoHelper` in `app/controllers/application_controller.rb` and
