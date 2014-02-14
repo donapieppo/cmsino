@@ -3,16 +3,18 @@
 Cms rails gem (Rails Engine) for developers in its smallest form possible. Not usable now unless
 you want to **help** developing :-)
 
+Authorization is done with https://github.com/ryanb/cancan
+
 ## Installation
 
 Add theses lines to your application's Gemfile:
 
-    gem 'cmsino'
     gem 'cancan'
+    gem 'cmsino'
 
 And then execute:
 
-    $ bundle
+    $ bundle update
     $ rails g cancan:ability
     $ bundle exec rake cmsino_engine:install:migrations
     $ bundle exec rake db:migrate
@@ -57,8 +59,7 @@ If you want to provide editable content to `home#index`
 update the file `config/cmsino.yml` with 
 
 ```yaml
-page:
-  home: Home Page
+home: Home Page
 ```
 
 add the tag `editable_page` to 
