@@ -2,8 +2,8 @@
 <html>
   <head>
     <title>CmsinoExample</title>
-    <%= stylesheet_link_tag    "application", :media => "all" %>
-    <%= javascript_include_tag "application" %>
+    <%= stylesheet_link_tag "cmsino/cmsino_internal", :media => "all" %>
+    <%= javascript_include_tag "cmsino/cmsino_internal" %>
     <%= csrf_meta_tags %>
   </head>
   <body>
@@ -29,8 +29,6 @@
       </div>
       <% if notice %>  <p class="notice"><%= notice %></p><% end %>
       <% if alert %>  <p class="alert"><%= alert %></p><% end %>
-
-      <%= editable_content(:hello, :layout) %>  
 
       <%= yield %>
     </div>

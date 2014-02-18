@@ -22,17 +22,23 @@
   <%= content.submit %>  
 <% end %>
 
-<div class="row">
-  <% @all_contents.each do |content| %>
-    <div class="span1">
-      <span class="badge badge-info" style="width: 25px; text-align: center"><%= content.locale %></span>
-      <% if content.locale != @content.locale %>
-        <%= link_to 'edit', edit_cmsino_content_path(content) %>
-      <% end %>
+<% @all_contents.each do |content| %>
+  <div class="row">
+    <div class="span2">
+      <span class="badge badge-warning" style="width: 35px; text-align: center">
+        <% if content.locale != @content.locale %>
+          <%= link_to content.locale, edit_cmsino_content_path(content) %>
+        <% else %>
+          <%= content.locale %>
+        <% end %>
+      </span>
+      <%= link_to '<i class="icon icon-trash"></i>'.html_safe, cmsino_content_path(content), :method => :delete, :data => { :confirm => 'sure?' } unless content.locale == @content.locale %>
     </div>
-    <div class="span11"><div class="alert alert-info"><%= content.text %></div></div>
-  <% end %>
-</div>
+    <div class="span10">
+      <div class="alert alert-info"><%= content.text %></div>
+    </div>
+  </div>
+<% end %>
 
 <%= @content.inspect %>  
 

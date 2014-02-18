@@ -1,4 +1,5 @@
 class Cmsino::ImageContentsController < Cmsino::ContentsController
+  layout 'cmsino/layouts/cmsino'
 
   def update
     @content = Cmsino::Content.find(params[:id])

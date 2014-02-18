@@ -1,4 +1,5 @@
 class Cmsino::ContentsController < ApplicationController
+  layout 'cmsino/layouts/cmsino'
   authorize_resource :class => Cmsino::Content
 
   def index
@@ -6,7 +7,7 @@ class Cmsino::ContentsController < ApplicationController
     @locales = Cmsino::Conf.instance.locales
     Cmsino::Content.order([:page, :name, :locale]).each do |content|
       @contents[content.page] ||= Hash.new
-      @contents[content.page][content.name] ||= Hash.new
+      @contents[content.page][content.name] = Hash.new
       @contents[content.page][content.name][content.locale] = content
     end
     @last_edited = session[:cmsino_last]
@@ -48,7 +49,11 @@ class Cmsino::ContentsController < ApplicationController
 
   def destroy
     @content = Cmsino::Content.find(params[:id])
-    @content.destroy
+    if @content.destroy
+      flash[:notice] = "OK"
+    else
+      flash[:error] = "Error"
+    end
     redirect_to session[:cmsino_from]
   end
 
