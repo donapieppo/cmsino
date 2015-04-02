@@ -19,6 +19,11 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_dependency "rails", "~> 4.2.0"
+  spec.add_dependency 'devise'
+  spec.add_dependency 'devise-i18n'
+  spec.add_dependency 'omniauth'
+  spec.add_dependency 'omniauth-openid'
+  spec.add_dependency 'cancan'
   
   spec.add_development_dependency "sqlite3"
   spec.add_development_dependency 'rspec-rails'
