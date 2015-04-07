@@ -1,6 +1,6 @@
 require "devise"
 require 'omniauth'
-require 'omniauth-openid'
+require 'omniauth-google-oauth2'
 require 'cancan'
 require "cmsino/version"
 require "cmsino/conf"
