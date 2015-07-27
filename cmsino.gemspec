@@ -18,17 +18,17 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ["lib"]
 
-  spec.add_dependency "rails", "~> 4.2.0"
-  spec.add_dependency 'devise'
-  spec.add_dependency 'devise-i18n'
-  spec.add_dependency 'omniauth'
-  spec.add_dependency 'omniauth-google-oauth2'
+  spec.add_dependency "rails", "~> 4.2.3"
+
   spec.add_dependency 'cancan'
+  spec.add_dependency 'simple_form'
+  spec.add_dependency 'bootstrap-sass'
+  spec.add_dependency 'font-awesome-sass'
+  spec.add_dependency 'sass-rails', '~> 5.0'
   
-  spec.add_development_dependency "sqlite3"
   spec.add_development_dependency 'rspec-rails'
   spec.add_development_dependency 'factory_girl_rails'
-  spec.add_development_dependency "database_cleaner"
+  spec.add_development_dependency 'database_cleaner'
 
 end
 
