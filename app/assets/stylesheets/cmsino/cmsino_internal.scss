@@ -1,7 +1,3 @@
-/*
- *= require "wysihtml5/bootstrap-wysihtml5"
-*/
-
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @import "font-awesome-sprockets";
@@ -9,4 +5,8 @@
 
 body {
 }
+
+/*
+ *= require "wysihtml5/bootstrap-wysihtml5"
+*/
 
