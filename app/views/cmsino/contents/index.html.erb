@@ -1,18 +1,22 @@
 <h1>Contents</h1>
 
-<div class="accordion" id="pages">
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
   <% @contents.each_key do |page| %>  
     <% @contents[page].each_key do |name| %>  
-      <div class="accordion-group">
-        <div class="accordion-heading">
-          <%# FIXME use some id or check security in page name %>
-          <a class="accordion-toggle" data-toggle="collapse" data-parent="#pages" href="#<%= Cmsino::Content.div_id(page, name) %>">
-            <strong><%= Cmsino::Page.description(page) %></strong> > <strong><%= name %></strong>
-          </a>
-        </div><!-- accordion-heading -->
-        <% in_class = (@last_edited == Cmsino::Content.div_id(page, name)) ? 'in' : '' %>
-        <div id="<%= Cmsino::Content.div_id(page, name) %>" class="accordion-body collapse <%= in_class %>">
-          <div class="accordion-inner">
+      <% div_id = Cmsino::Content.div_id(page, name) %>  
+      <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="heading<%= div_id %>">
+          <h4 class="panel-title">
+            <%# FIXME use some id or check security in page name %>
+            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#<%= div_id %>" aria-expanded="false" aria-controls="<%= div_id %>">
+              pagina: <strong><%= Cmsino::Page.description(page) %></strong> > <strong><%= name %></strong>
+            </a>
+          </h4>
+        </div><!-- panel-heading -->
+
+        <% in_class = (@last_edited == div_id) ? 'in' : '' %>
+        <div id="<%= div_id %>" class="panel-collapse collapse <%= in_class %>" aria-labelledby="heading<%= div_id %>">
+          <div class="panel-body">
             <% @locales.each do |locale| %>  
               <span class="badge badge-info" style="width: 25px; text-align: center"><%= locale %></span>
               <% if @contents[page][name][locale] %>  
@@ -26,9 +30,10 @@
               <% end %>
               <br/>
             <% end %>
-          </div><!-- accordion-inner -->
-        </div><!-- accordion-body -->
-      </div><!-- accordion-group -->
+          </div><!-- panel-body -->
+        </div><!-- panel-collapse -->
+      </div><!-- panel -->
     <% end %><!-- name -->
   <% end %><!-- page -->
 </div>
+
