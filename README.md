@@ -1,9 +1,9 @@
 # Cmsino
 
-Cms rails gem (Rails Engine) for developers in its smallest form possible. Not usable now unless
-you want to **help** developing :-)
+Ruby on rails gem (Rails Engine) for developers to add cms capability to their appication in its smallest form possible. Not usable now unless you want to **help** developing :-)
 
 Authorization is done with https://github.com/ryanb/cancan
+but easy to change.
 
 ## Installation
 
@@ -105,8 +105,6 @@ When https://github.com/geraudmathe/Locomotive-fundamentals says "Developing a L
 
 Use https://github.com/flavorjones/loofah for cleaning html posted by authenticated
 user.
-
-Remove dependecies from bootstrap.
 
 ## Contributing
 
