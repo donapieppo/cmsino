@@ -8,11 +8,11 @@ class Cmsino::Page
   end
 
   def content(name, locale)
-    Cmsino::Content.find_or_create_by(:page => @name, :name => name, :locale => validate_locale(locale))
+    Cmsino::Content.find_or_create_by(:umbrella => @name, :name => name, :locale => validate_locale(locale))
   end
 
   def image_content(name)
-    Cmsino::ImageContent.find_or_create_by(:page => @name, :name => name)
+    Cmsino::ImageContent.find_or_create_by(:umbrella => @name, :name => name)
   end
 
   def validate_locale(locale)

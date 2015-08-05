@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>CmsinoExample</title>
+    <title>Editing</title>
     <%= stylesheet_link_tag    "cmsino/cmsino_internal", :media => "all" %>
     <%= javascript_include_tag "cmsino/cmsino_internal" %>
     <%= csrf_meta_tags %>
@@ -16,7 +16,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <%= link_to 'Cmsino Powered', home_path, :class => "navbar-brand" %>
+        <%= link_to 'Cmsino Powered', root_path, :class => "navbar-brand" %>
       </div><!-- navbar-header -->  
       <nav class="collapse navbar-collapse" id="bs-navbar-collapse">
       <ul class="nav navbar-nav"> 
@@ -24,22 +24,12 @@
         <li><%= link_to image_tag('en.png'), url_for(:locale => :en) %></li>  
         <li><%= link_to 'help', helps_path %></li>  
       </ul>
-      <ul class="nav navbar-nav pull-right">
-        <% if user_signed_in? %>
-          <li><%= link_to current_user.email, '#' %></li>
-          <li><%= link_to "Sign out", destroy_user_session_path, :method => :delete %></li>
-          <li><%= link_to "Cmsino", cmsino_contents_path %></li>
-        <% else %>
-          <li><%= link_to "Sign in with google", user_omniauth_authorize_path(:google_oauth2) %>
-        <% end %>
-      </ul>
       </nav>
     </div><!-- container -->
     </header>
     <div class="container">
-      <% if notice %>  <p class="notice"><%= notice %></p><% end %>
-      <% if alert %>  <p class="alert"><%= alert %></p><% end %>
-      <%= editable_content(:hello, :layout) %>  
+      <% if notice %><p class="notice"><%= notice %></p><% end %>
+      <% if alert %><p class="alert"><%= alert %></p><% end %>
       <%= yield %>
     </div>
   </body>

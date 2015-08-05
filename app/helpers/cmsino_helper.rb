@@ -18,10 +18,10 @@ module CmsinoHelper
     visible_content = content.text
     if can?(:update, content) 
       editable_tags = %Q|class="cmsino_editable" data-editor="#{edit_cmsino_content_path(content)}"|
-      visible_content = 'edit me' if content.text.blank?
+      visible_content = 'edit me' if visible_content.blank?
     end
 
-    raw %Q|<div class="cmsino-help">Shift + click to edit</div><div #{editable_tags} id="#{content.div_id}">#{visible_content}</div>|
+    raw %Q|<div #{editable_tags} id="#{content.div_id}"><div class="cmsino-help">Shift + click to edit</div>#{visible_content}</div>|
   end
 
   def editable_image_content(name, page = nil)
@@ -31,6 +31,13 @@ module CmsinoHelper
     end
     image_content = page.image_content(name)
     raw %Q|<h4>#{content.title}</h4>#{content.text}|
+  end
+
+  # POSTS
+
+  def editable_posts(name)
+    @cmsino_posts ||= Hash.new
+    @cmsino_posts[name] = Cmsino::Post.where(umbrella: name).order(:date)
   end
 
 end

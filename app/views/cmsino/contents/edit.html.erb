@@ -1,5 +1,5 @@
 <ul class="breadcrumb">
-  <li><%= @content.page %></li>
+  <li><%= @content.umbrella %></li>
   <li><%= @content.name %></li>
   <li><%= @content.locale %></li>
 </ul>
@@ -9,22 +9,23 @@
 <% end %>
 
 <%= form_for @content do |content| %>  
-  <%= content.hidden_field :page %>  
-  <%= content.hidden_field :name %>  
+  <%= content.hidden_field :umbrella %>  
   <%= content.hidden_field :locale %>  
   <% if @content.class == Cmsino::ImageContent %>  
-    <%= content.label :title %>  
-    <%= content.text_field :title %>  
+    <p> <%= content.label :title %> <%= content.text_field :title %> </p>
+  <% elsif @content.class == Cmsino::Post %>
+    <p> <%= content.label :name %>  <%= content.text_field :name %> </p>
+  <% else %>
+    <%= content.hidden_field :name %>  
   <% end %>
-  <div>
-    <%= content.text_area :text, :rows => 4, :style => "width: 810px; height: 200px" %>  
-  </div>
-  <%= content.submit %>  
+  <p><%= content.text_area :text, :rows => 4, :style => "width: 810px; height: 200px" %>  </p>
+  <p><%= content.submit %> </p>
 <% end %>
 
-<% @all_contents.each do |content| %>
-  <div class="row">
-    <div class="span2">
+<div class="row">
+  <% @all_locales.each do |content| %>
+    <% content == @content and next %>  
+    <div class="col-md-1">
       <span class="badge badge-warning" style="width: 35px; text-align: center">
         <% if content.locale != @content.locale %>
           <%= link_to content.locale, edit_cmsino_content_path(content) %>
@@ -34,18 +35,15 @@
       </span>
       <%= link_to '<i class="icon icon-trash"></i>'.html_safe, cmsino_content_path(content), :method => :delete, :data => { :confirm => 'sure?' } unless content.locale == @content.locale %>
     </div>
-    <div class="span10">
+    <div class="col-md-11">
       <div class="alert alert-info"><%= content.text %></div>
     </div>
-  </div>
-<% end %>
+  <% end %>
+</div>
 
-<%= @content.inspect %>  
-
-<script type="text/javascript">
-  $('#cmsino_content_text').wysihtml5({"stylesheets": [], "html": true,});
-</script>
-
+<pre>
+  <%= @content.inspect %>  
+</pre>
 
 <!-- 
   bkLib.onDomLoaded(function() { nicEditors.allTextAreas({iconsPath : '<%= image_path('nicEditorIcons.gif') %>'}) });
