@@ -1,11 +1,8 @@
 require 'bootstrap-sass'
 require 'font-awesome-sass'
-require 'devise'
-require 'omniauth'
-require 'omniauth-google-oauth2'
-require 'cancan'
 require 'cmsino/version'
 require 'cmsino/conf'
+require 'bootstrap-wysihtml5-rails'
 
 module Cmsino
   class Engine < Rails::Engine
