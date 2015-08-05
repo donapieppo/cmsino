@@ -1,12 +1,12 @@
 .cmsino_editable:hover {
   cursor: move; 
-  opacity: 0.3;
-  background-color: #ddd;
+  background-color: #eee;
 }
 
 .cmsino-help {
+  opacity: 1;
   display: none;
   position: absolute;
   background-color: yellow;
-  z-index: 100;
+  z-index: 1001;
 }

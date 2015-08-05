@@ -1,8 +1,10 @@
 $ ->
   $(".cmsino_editable").mouseenter( ->
-    $(this).prev().css('display', 'block');
+    $(this).css('opacity', '0.3')
+    $(this).find('.cmsino-help').css('display', 'block').css('opacity', '1')
   ).mouseleave( ->
-    $(this).prev().css('display', 'none');
+    $(this).css('opacity', '1')
+    $(this).find('.cmsino-help').css('display', 'none')
   )
   $(".cmsino_editable").click( (event) ->
     if event.shiftKey 
