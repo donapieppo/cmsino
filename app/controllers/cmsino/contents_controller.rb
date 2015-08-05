@@ -5,45 +5,51 @@ class Cmsino::ContentsController < ApplicationController
   def index
     @contents = Hash.new
     @locales = Cmsino::Conf.instance.locales
-    Cmsino::Content.order([:page, :name, :locale]).each do |content|
-      @contents[content.page] ||= Hash.new
-      @contents[content.page][content.name] = Hash.new
-      @contents[content.page][content.name][content.locale] = content
+    Cmsino::Content.order([:umbrella, :name, :locale]).each do |content|
+      @contents[content.umbrella] ||= Hash.new
+      @contents[content.umbrella][content.name] = Hash.new
+      @contents[content.umbrella][content.name][content.locale] = content
     end
     @last_edited = session[:cmsino_last]
   end
 
   def new 
-    @content = Cmsino::Content.new(:page => params[:page], 
-                                   :name => params[:name],
-                                   :locale => params[:locale])
-    @all_contents = Cmsino::Content.where(:page => @content.page, 
-                                          :name => @content.name)
+    if params[:post]
+      @content = Cmsino::Post.new(umbrella: params[:umbrella], 
+                                  name:     params[:name],
+                                  locale:   params[:locale])
+    else
+      @content = Cmsino::Content.new(umbrella: params[:umbrella], 
+                                     name:     params[:name],
+                                     locale:   params[:locale])
+    end
+
+    @all_locales = Cmsino::Content.where(umbrella: @content.umbrella, 
+                                         name:     @content.name)
     render :action => :edit
   end
 
-  # "cmsino_content"=>{"page"=>"page_name", "name"=>"content_name", "locale"=>"en", "text"=>"<p>my text</p>"}
+  # "cmsino_content"=>{"umbrella"=>"page_name", "name"=>"content_name", "locale"=>"en", "text"=>"<p>my text</p>"}
   def create
     @content = Cmsino::Content.new(cmsino_content_params)
     session[:cmsino_last] = @content.div_id
     if @content.save
-      flash_notice = "OK"
-      redirect_to :action => :index
+      redirect_to action: :index, notice: 'OK'
     else
-      render :action => :edit
+      render action: :edit
     end
   end
 
   def edit
     session[:cmsino_from] = env["HTTP_REFERER"]
     @content = Cmsino::Content.find(params[:id])
-    @all_contents = Cmsino::Content.where(:page => @content.page, :name => @content.name)
+    @all_locales = Cmsino::Content.where(:umbrella => @content.umbrella, :name => @content.name)
   end
 
   def update
     @content = Cmsino::Content.find(params[:id])
     session[:cmsino_last] = @content.div_id
-    @content.update_attribute(:text, params[:cmsino_content][:text])
+    @content.update_attributes(cmsino_content_params)
     redirect_to session[:cmsino_from]
   end
 
@@ -60,8 +66,11 @@ class Cmsino::ContentsController < ApplicationController
   private
 
   def cmsino_content_params
-    params.require(:cmsino_content).permit(:page, :name, :locale, :text)
+    (params[:cmsino_content] || params[:cmsino_post]).permit(:umbrella, :title, :name, :locale, :text)
   end
 
+  def cmsino_text
+    (params[:cmsino_content] || params[:cmsino_post])[:text]
+  end
 
 end
