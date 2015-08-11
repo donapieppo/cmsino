@@ -37,7 +37,7 @@ module CmsinoHelper
 
   def editable_posts(name)
     @cmsino_posts ||= Hash.new
-    @cmsino_posts[name] = Cmsino::Post.where(umbrella: name).order(:date)
+    @cmsino_posts[name] = Cmsino::Post.where(umbrella: name).order('date desc')
   end
 
 end
