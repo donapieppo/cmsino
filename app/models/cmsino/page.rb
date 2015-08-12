@@ -11,8 +11,8 @@ class Cmsino::Page
     Cmsino::Content.find_or_create_by(:umbrella => @name, :name => name, :locale => validate_locale(locale))
   end
 
-  def image_content(name)
-    Cmsino::ImageContent.find_or_create_by(:umbrella => @name, :name => name)
+  def medium_content(name)
+    Cmsino::Medium.find_or_create_by(:umbrella => @name, :name => name)
   end
 
   def validate_locale(locale)

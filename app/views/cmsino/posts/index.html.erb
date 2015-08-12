@@ -1,7 +1,10 @@
 <h1>Posts</h1>
 
-<ul>
+<ul class="list-group">
   <% @posts.each do |p| %>  
-    <%= p %>  
+    <li class="list-group-item">
+    <p><%= p.name %> (<%= l p.date %>)</p>
+    <%= raw p.text %> 
+    <%= link_to 'edit', edit_cmsino_content_path(p) %>  
   <% end %>
 </ul>

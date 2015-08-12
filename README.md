@@ -16,7 +16,7 @@ And then execute:
 
     $ bundle update
     $ rails g cancan:ability
-    $ bundle exec rake cmsino_engine:install:migrations
+    $ bundle exec rake cmsino_engine:install:migrations # populates 
     $ bundle exec rake db:migrate
 
 To configure use `config/initializers/cmsino.rb` as

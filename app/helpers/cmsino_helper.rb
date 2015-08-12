@@ -40,5 +40,8 @@ module CmsinoHelper
     @cmsino_posts[name] = Cmsino::Post.where(umbrella: name).order('date desc')
   end
 
+  def icon(name, options = { :text => "", :size => "18" })
+    raw "<i style=\"font-size: #{options[:size]}px\" class=\"fa fa-#{name}\"></i> #{options[:text]}"
+  end
 end
 

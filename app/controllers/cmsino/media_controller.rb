@@ -29,7 +29,7 @@ class Cmsino::MediaController < ApplicationController
   private
 
   def medium_params
-    params[:cmsino_medium].permit(:name, :attach)
+    params[:cmsino_medium].permit(:name, :description, :attach)
   end
 
   def get_media

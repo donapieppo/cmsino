@@ -31,7 +31,11 @@ class Cmsino::ContentsController < ApplicationController
 
   # "cmsino_content"=>{"umbrella"=>"page_name", "name"=>"content_name", "locale"=>"en", "text"=>"<p>my text</p>"}
   def create
-    @content = Cmsino::Content.new(cmsino_content_params)
+    if params[:cmsino_post]
+      @content = Cmsino::Post.new(cmsino_content_params)
+    else
+      @content = Cmsino::Content.new(cmsino_content_params)
+    end
     session[:cmsino_last] = @content.div_id
     if @content.save
       redirect_to action: :index, notice: 'OK'
@@ -66,7 +70,7 @@ class Cmsino::ContentsController < ApplicationController
   private
 
   def cmsino_content_params
-    (params[:cmsino_content] || params[:cmsino_post]).permit(:umbrella, :title, :name, :locale, :text)
+    (params[:cmsino_content] || params[:cmsino_post]).permit(:umbrella, :date, :title, :name, :locale, :text)
   end
 
   def cmsino_text

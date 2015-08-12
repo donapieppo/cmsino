@@ -4,22 +4,17 @@
   <li><%= @content.locale %></li>
 </ul>
 
-<% if @content.class == Cmsino::ImageContent %>  
-  <%= image_tag(@content.name, :width => '200px') %>  
-<% end %>
-
-<%= form_for @content do |content| %>  
+<%= simple_form_for @content do |content| %>  
   <%= content.hidden_field :umbrella %>  
   <%= content.hidden_field :locale %>  
-  <% if @content.class == Cmsino::ImageContent %>  
-    <p> <%= content.label :title %> <%= content.text_field :title %> </p>
-  <% elsif @content.class == Cmsino::Post %>
-    <p> <%= content.label :name %>  <%= content.text_field :name %> </p>
+  <% if @content.class == Cmsino::Post %>
+    <%= content.input :name %> 
+    <%= content.input :date, as: :date %> 
   <% else %>
     <%= content.hidden_field :name %>  
   <% end %>
-  <p><%= content.text_area :text, :rows => 4, :style => "width: 810px; height: 200px" %>  </p>
-  <p><%= content.submit %> </p>
+    <%= content.input :text %>  
+    <%= content.submit %> 
 <% end %>
 
 <div class="row">
