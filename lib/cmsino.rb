@@ -3,6 +3,7 @@ require 'font-awesome-sass'
 require 'cmsino/version'
 require 'cmsino/conf'
 require 'bootstrap-wysihtml5-rails'
+require 'paperclip'
 
 module Cmsino
   class Engine < Rails::Engine

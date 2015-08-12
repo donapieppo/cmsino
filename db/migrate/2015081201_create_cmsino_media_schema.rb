@@ -1,26 +1,15 @@
-class CreateCmsinoContentSchema < ActiveRecord::Migration
+class CreateCmsinoMediaSchema < ActiveRecord::Migration
   def up
-    # umbrella = :home 
-    # name = :index
-    # locale = :it
-    create_table :cmsino_contents do |t|
-      t.string   :umbrella
+    create_table :cmsino_media do |t|
       t.string   :name
-      t.string   :locale
-      t.string   :title
-      t.text     :text
-      t.text     :excerpt  
-      t.datetime :date
-      t.datetime :from
-      t.datetime :to
-      t.string   :status 
+      t.text     :description
       t.string   :type
       t.timestamps
     end
   end
 
   def self.down
-    remove_table :cmsino_contents
+    remove_table :cmsino_media
   end
 end
 

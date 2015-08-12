@@ -1,0 +1,6 @@
+<%= simple_form_for @medium do |medium| %>  
+  <%= medium.input :name %>  
+  <%= medium.input :description %>  
+  <%= medium.input :attach, as: :file %>
+  <%= medium.submit %>
+<% end %>
