@@ -1,10 +1,12 @@
+# In database the contents in the same page have
+# the same umbrella.
 class Cmsino::Page
   attr_reader :name, :description
 
   def initialize(name)
     @name = name
     @cmsino_conf = Cmsino::Conf.instance
-    @description = @cmsino_conf.page_description(name)
+    @description = @cmsino_conf.page_description(name) || name
   end
 
   def content(name, locale)

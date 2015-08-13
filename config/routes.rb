@@ -5,6 +5,7 @@ Rails.application.routes.draw do
       resources :media_uses
     end
     resources :media 
+    resources :pages
     resources :posts
     resources :media_uses
   end

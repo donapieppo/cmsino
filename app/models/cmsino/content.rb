@@ -1,3 +1,6 @@
+# umbrella can be the name of the page
+# or the group of Cmsino::Post 
+# (posts are contents with type="Cmsino::Post")
 class Cmsino::Content < ActiveRecord::Base
   self.table_name = 'cmsino_contents'
 
