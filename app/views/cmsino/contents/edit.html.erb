@@ -9,7 +9,7 @@
   <%= content.hidden_field :locale %>  
   <% if @content.class == Cmsino::Post %>
     <%= content.input :name %> 
-    <%= content.input :date, as: :date %> 
+    <%= content.input :date, as: :date_picker %>
   <% else %>
     <%= content.hidden_field :name %>  
   <% end %>
