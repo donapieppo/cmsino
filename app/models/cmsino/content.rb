@@ -14,4 +14,8 @@ class Cmsino::Content < ActiveRecord::Base
   def div_id
     Cmsino::Content.div_id(self.umbrella, self.name)
   end
+
+  def to_s
+    self.title ? self.title : self.name
+  end
 end

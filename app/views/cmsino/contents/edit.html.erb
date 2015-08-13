@@ -13,8 +13,8 @@
   <% else %>
     <%= content.hidden_field :name %>  
   <% end %>
-    <%= content.input :text %>  
-    <%= content.submit %> 
+  <%= content.input :text %>  
+  <%= content.submit %> 
 <% end %>
 
 <div class="row">
@@ -36,10 +36,13 @@
   <% end %>
 </div>
 
-<pre>
-  <%= @content.inspect %>  
-</pre>
+<%= ul_media(@content) %>  
+
+<% if ! @content.new_record? %>  
+  <%= link_to icon('camera') + 'add media', cmsino_content_media_path(@content), class: 'button' %>  
+<% end %>
+
 
 <!-- 
-  bkLib.onDomLoaded(function() { nicEditors.allTextAreas({iconsPath : '<%= image_path('nicEditorIcons.gif') %>'}) });
-  -->
+bkLib.onDomLoaded(function() { nicEditors.allTextAreas({iconsPath : '<%= image_path('nicEditorIcons.gif') %>'}) });
+-->

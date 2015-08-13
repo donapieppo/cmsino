@@ -1,18 +1,8 @@
-<h1>Media</h1>
+<h1>
+  <%= t :media_libray %>
+  <small><%= "for #{@content.to_s}" if @content %></small>
+</h1>
 
-<ul class="media-list">
-  <% @media.each do |media| %>  
-    <li class="media">
-    <div class="media-left">
-      <a href="#"><%= image_tag media.attach.url(:thumb), class: "media-object" %></a>
-    </div>
-    <div class="media-body">
-      <h4 class="media-heading"><%= media.name %>  </h4>
-      <p><%= media.description %> </p>
-      <p><%= link_to_delete cmsino_medium_path(media) %>  
-    </div>
-    </li>
-  <% end %>
-</ul>
+<%= ul_media(@media, @content) %>  
 
-<%= link_to 'new medium', new_cmsino_medium_path %>  
+<%= link_to icon('plus') + 'new medium', new_cmsino_medium_path %>  

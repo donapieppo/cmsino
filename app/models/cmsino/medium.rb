@@ -1,7 +1,7 @@
 class Cmsino::Medium < ActiveRecord::Base
   self.table_name = 'cmsino_media'
 
-  has_many :cmsino_media_uses, class_name: "Cmsino::MediaUse", foreign_key: "cmsino_medium_id"
+  has_many :cmsino_media_uses, class_name: "Cmsino::MediaUse", foreign_key: "cmsino_medium_id", dependent: :destroy
   has_many :cmsino_contents, through: :cmsino_media_uses, class_name: "Cmsino::Content"
 
   has_attached_file :attach,

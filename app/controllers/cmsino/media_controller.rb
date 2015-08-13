@@ -6,6 +6,8 @@ class Cmsino::MediaController < ApplicationController
 
   def index
     @media = Cmsino::Medium.order(:name)
+    # in case we want to add media to a content
+    @content = Cmsino::Content.find(params[:content_id]) if params[:content_id]
   end
 
   def new
