@@ -3,8 +3,12 @@
 <ul class="list-group">
   <% @posts.each do |p| %>  
     <li class="list-group-item">
-    <p><%= p.name %> (<%= l p.date %>)</p>
-    <%= raw p.text %> 
-    <%= link_to 'edit', edit_cmsino_content_path(p) %>  
+    <p><strong><%= p.name %> (<%= l p.date %>)</strong></p>
+    <p><%= raw p.text %></p>
+    <% p.cmsino_media.each do |m| %>  
+      <%= m %>  
+    <% end %>
+    <%= link_to_edit edit_cmsino_content_path(p) %>  
+    <%= link_to_delete edit_cmsino_content_path(p) %>  
   <% end %>
 </ul>

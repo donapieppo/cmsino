@@ -3,7 +3,7 @@ class Cmsino::PostsController < Cmsino::ContentsController
   authorize_resource :class => Cmsino::Content
 
   def index
-    @posts = Cmsino::Post.order(:umbrella, :date)
+    @posts = Cmsino::Post.order(:umbrella, :date).includes(:cmsino_media)
   end
 
 end
