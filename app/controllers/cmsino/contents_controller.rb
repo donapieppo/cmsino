@@ -54,7 +54,7 @@ class Cmsino::ContentsController < ApplicationController
     @content = Cmsino::Content.find(params[:id])
     session[:cmsino_last] = @content.div_id
     @content.update_attributes(cmsino_content_params)
-    redirect_to session[:cmsino_from]
+    redirect_to session[:cmsino_from] || root_path
   end
 
   def destroy
