@@ -9,14 +9,13 @@ but easy to change.
 
 Add theses lines to your application's Gemfile:
 
-    gem 'cancan'
-    gem 'cmsino'
+    gem 'cmsino', :git => 'git@github.com:donapieppo/cmsino.git'
 
 And then execute:
 
     $ bundle update
     $ rails g cancan:ability
-    $ bundle exec rake cmsino_engine:install:migrations # populates 
+    $ bundle exec rake cmsino_engine:install:migrations # populates migrations
     $ bundle exec rake db:migrate
 
 To configure use `config/initializers/cmsino.rb` as
