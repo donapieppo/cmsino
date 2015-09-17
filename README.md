@@ -37,6 +37,8 @@ For example in `app/controllers/application_controller.rb`
 
 ```ruby
 class ApplicationController < ActionController::Base
+  [...]
+
   include CmsinoHelper
 
   def current_user
@@ -56,6 +58,17 @@ and in `app/models/ability.rb`
 Of course in real cases you use something like 
 https://github.com/plataformatec/devise to handle
 current_user
+
+Include cmsino/cmsino in your stylesheet and javascript
+assets: in `app/assets/stylesheets/application.css`
+```css
+  *= require cmsino/cmsino
+```
+and in `app/assets/javascripts/application.js`
+```javascript
+  //= require cmsino/cmsino
+```
+
 
 If you want to provide editable content to `home#index`
 update the file `config/cmsino.yml` with 
