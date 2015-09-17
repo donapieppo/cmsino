@@ -1,0 +1,40 @@
+WordPress
+
+http://premium.wpmudev.org/blog/devs-guide-wordpress-database/
+The posts table, unsurprisingly, holds your posts. Not just your actual blog posts, but anything that is considered to be a post in WordPress. This includes pages, revisions, custom post types and attachments. To differentiate between the different content, WordPress uses a post_type column.
+
+post_type = page, attachment, post
+In one sense “post” is an umbrella term for content on your website
+In the other sense, “post” is the post type
+
+post_status=publish, future, draft, pending, private, trash, auto-draft and inherit
+post_name=The name of the post, generated from the title by replacing spaces with dashes and removing special characters
+
++-----------------------+---------------------+------+-----+---------------------+----------------+
+| Field                 | Type                | Null | Key | Default             | Extra          |
++-----------------------+---------------------+------+-----+---------------------+----------------+
+| ID                    | bigint(20) unsigned | NO   | PRI | NULL                | auto_increment |
+| post_author           | bigint(20) unsigned | NO   | MUL | 0                   |                |
+| post_date             | datetime            | NO   |     | 0000-00-00 00:00:00 |                |
+| post_date_gmt         | datetime            | NO   |     | 0000-00-00 00:00:00 |                |
+| post_content          | longtext            | NO   |     | NULL                |                |
+| post_title            | mediumtext          | NO   |     | NULL                |                |
+| post_excerpt          | mediumtext          | NO   |     | NULL                |                |
+| post_status           | varchar(20)         | NO   |     | publish             |                |
+| comment_status        | varchar(20)         | NO   |     | open                |                |
+| ping_status           | varchar(20)         | NO   |     | open                |                |
+| post_password         | varchar(20)         | NO   |     |                     |                |
+| post_name             | varchar(200)        | NO   | MUL |                     |                |
+| to_ping               | mediumtext          | NO   |     | NULL                |                |
+| pinged                | mediumtext          | NO   |     | NULL                |                |
+| post_modified         | datetime            | NO   |     | 0000-00-00 00:00:00 |                |
+| post_modified_gmt     | datetime            | NO   |     | 0000-00-00 00:00:00 |                |
+| post_content_filtered | longtext            | NO   |     | NULL                |                |
+| post_parent           | bigint(20) unsigned | NO   | MUL | 0                   |                |
+| guid                  | varchar(255)        | NO   |     |                     |                |
+| menu_order            | int(11)             | NO   |     | 0                   |                |
+| post_type             | varchar(20)         | NO   | MUL | post                |                |
+| post_mime_type        | varchar(100)        | NO   |     |                     |                |
+| comment_count         | bigint(20)          | NO   |     | 0                   |                |
++-----------------------+---------------------+------+-----+---------------------+----------------+
+
