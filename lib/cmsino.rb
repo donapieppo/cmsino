@@ -5,6 +5,8 @@ require 'cmsino/conf'
 require 'bootstrap-wysihtml5-rails'
 require 'bootstrap-datepicker-rails'
 require 'paperclip'
+require 'simple_form'
+require 'cancan'
 
 module Cmsino
   class Engine < Rails::Engine

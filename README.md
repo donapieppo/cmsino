@@ -9,14 +9,13 @@ but easy to change.
 
 Add theses lines to your application's Gemfile:
 
-    gem 'cancan'
-    gem 'cmsino'
+    gem 'cmsino', :git => 'git@github.com:donapieppo/cmsino.git'
 
 And then execute:
 
     $ bundle update
     $ rails g cancan:ability
-    $ bundle exec rake cmsino_engine:install:migrations # populates 
+    $ bundle exec rake cmsino_engine:install:migrations # populates migrations
     $ bundle exec rake db:migrate
 
 To configure use `config/initializers/cmsino.rb` as
@@ -38,6 +37,8 @@ For example in `app/controllers/application_controller.rb`
 
 ```ruby
 class ApplicationController < ActionController::Base
+  [...]
+
   include CmsinoHelper
 
   def current_user
@@ -57,6 +58,17 @@ and in `app/models/ability.rb`
 Of course in real cases you use something like 
 https://github.com/plataformatec/devise to handle
 current_user
+
+Include cmsino/cmsino in your stylesheet and javascript
+assets: in `app/assets/stylesheets/application.css`
+```css
+  *= require cmsino/cmsino
+```
+and in `app/assets/javascripts/application.js`
+```javascript
+  //= require cmsino/cmsino
+```
+
 
 If you want to provide editable content to `home#index`
 update the file `config/cmsino.yml` with 
