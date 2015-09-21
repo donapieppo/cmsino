@@ -6,8 +6,7 @@ $ ->
     $(this).css('opacity', '1')
     $(this).find('.cmsino-help').css('display', 'none')
   )
-  $(".cmsino_editable").click( (event) ->
-    if event.shiftKey 
-      url = $(this).attr('data-editor')
-      window.location =  url
+  $(".cmsino_editable").dblclick( (event) ->
+    url = $(this).attr('data-editor')
+    window.location =  url
   )
