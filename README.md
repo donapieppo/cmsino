@@ -125,17 +125,44 @@ user.
 in `db/migrate/2013011001_create_cmsino_content_schema.rb` you find the definition of
 the Cmsino::Content table in database. 
 
-### Type field
+`Type`, `Umbrella` and `Name` for a content are hardcoded in the
+code. 
 
-Identifies class in rails: Cmsino::Content, Cmsino::Post
+*Type field*
 
-### Umbrella field
+Identifies Rails class: `Cmsino::Content`, `Cmsino::Post`
+
+*Umbrella field*
 
 Groups together contents (for example Cmsino::Content in the same page) or posts 
 (for example Cmsino::Post to be displayed in the same place)
 Example of umbrella: 'home', 'news', where_we_are'
 
-With the name field (and locale field) identifies the content. 
+*Name field*
+Records with the same umbrella and name identifies the same content with 
+different locales.
+
+Example of a content from code to database:
+
+```ruby
+class WelcomeController < ApplicationController
+  def index
+    editable_page(:home, 'Home Page')
+  end
+end
+```
+`app/views/welcome/index.html.erb`
+```ruby
+<p><%= editable_content(:contacts) %></p>
+```
+
+In the database the record will be
+
+umbrella | home                    | from programmer
+name     | main                    | from programmer
+locale   | it                      | actual locale
+title    | Selling contacts        | title submitted by csmino user
+text     | tel +3221222 <br/> ciao | content submitted by csmino user
 
 
 ## Contributing
