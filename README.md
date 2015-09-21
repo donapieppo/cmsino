@@ -135,8 +135,9 @@ Identifies Rails class: `Cmsino::Content`, `Cmsino::Post`
 **Umbrella field**
 
 Groups together contents (for example Cmsino::Content in the same page) or posts 
-(for example Cmsino::Post to be displayed in the same place)
-Example of umbrella: 'home', 'news', where_we_are'
+(for example Cmsino::Post to be displayed in the same place).
+
+Example of umbrella: *'home'*, *'news'*, *'where_we_are'*
 
 **Name field**
 Records with the same umbrella and name identifies the same content with 
