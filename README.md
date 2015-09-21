@@ -158,13 +158,15 @@ end
 
 In the database the record will be
 
+```
 Field    | Content                 | Where it comes from 
----------|-------------------------|
-umbrella | home                    | from programmer
-name     | main                    | from programmer
+---------|-------------------------|---------------------------------
+umbrella | home                    | from programmer (in code)
+name     | main                    | from programmer (in code)
 locale   | it                      | actual locale
 title    | Selling contacts        | title submitted by csmino user
 text     | tel +3221222 <br/> ciao | content submitted by csmino user
+```
 
 
 ## Contributing
