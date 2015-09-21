@@ -2,27 +2,29 @@
 
 Ruby on rails gem (Rails Engine) for developers to add small cms capabilities to their application. Not usable now unless you want to **help** developing :-)
 
-Authorization is done with https://github.com/ryanb/cancan
-but easy to change.
+Authorization is done with https://github.com/ryanb/cancan but easy to change.
 
 ## Installation
 
 Add theses lines to your application's Gemfile:
-
+```bash
     gem 'cmsino', :git => 'git@github.com:donapieppo/cmsino.git'
+```
 
 And then execute:
-
+```bash
     $ bundle update
     $ rails g cancan:ability
     $ bundle exec rake cmsino_engine:install:migrations # populates migrations
-    $ bundle exec rake db:migrate
+    $ bundle exec rake db:migrate                       # creates cmsino_* tables
+```
 
 To configure use `config/initializers/cmsino.rb` as
-
+```ruby
     Cmsino::Conf.setup do |config|
       config.locales = ['it', 'en', 'es']
     end
+```
 
 Cmsino gets the locale from I18n.locale. You can see http://guides.rubyonrails.org/i18n.html
 for Rails Internationalization.
@@ -117,6 +119,24 @@ When https://github.com/geraudmathe/Locomotive-fundamentals says "Developing a L
 
 Use https://github.com/flavorjones/loofah for cleaning html posted by authenticated
 user.
+
+## Note on database
+
+in `db/migrate/2013011001_create_cmsino_content_schema.rb` you find the definition of
+the Cmsino::Content table in database. 
+
+### Type field
+
+Identifies class in rails: Cmsino::Content, Cmsino::Post
+
+### Umbrella field
+
+Groups together contents (for example Cmsino::Content in the same page) or posts 
+(for example Cmsino::Post to be displayed in the same place)
+Example of umbrella: 'home', 'news', where_we_are'
+
+With the name field (and locale field) identifies the content. 
+
 
 ## Contributing
 
