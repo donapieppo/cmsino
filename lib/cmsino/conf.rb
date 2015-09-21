@@ -9,7 +9,7 @@ module Cmsino
 
     def initialize
       @locales = ['it']
-      @pages = YAML.load_file(File.join(Rails.root, "config", "cmsino.yml"))
+      # @pages = YAML.load_file(File.join(Rails.root, "config", "cmsino.yml"))
     end
 
     def self.setup(&block)
@@ -17,7 +17,8 @@ module Cmsino
     end
 
     def page_description(name)
-      @pages[name]
+      raise "NO PAGE"
+      # @pages[name]
     end
      
   end

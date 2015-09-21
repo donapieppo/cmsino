@@ -1,8 +1,10 @@
 class CreateCmsinoContentSchema < ActiveRecord::Migration
   def up
     # umbrella = :home 
-    # name = :index
-    # locale = :it
+    # name     = :index
+    # locale   = :it
+    # type     = Cmsino::Content
+    #            Cmsino::Post
     create_table :cmsino_contents do |t|
       t.string   :umbrella
       t.string   :name

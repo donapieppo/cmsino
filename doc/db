@@ -38,3 +38,45 @@ post_name=The name of the post, generated from the title by replacing spaces wit
 | comment_count         | bigint(20)          | NO   |     | 0                   |                |
 +-----------------------+---------------------+------+-----+---------------------+----------------+
 
+
+example CmsinoContents
+
+for content
+      id       1
+      umbrella 'home'
+      name     'who' # common in locales, umbrella and name are coded (in controllers and views) and not from user
+      locale   'us'
+      title    'Who we are'
+      text     '<h1>Who we are</h1><p>We are who we are!</p>'
+      status   'published'
+      type     'Cmsino::Content'
+
+      id       2
+      umbrella 'home'
+      name     'who' # common in locales
+      locale   'it'
+      title    'Chi siamo'
+      text     '<h1>Chi siamo</h1><p>Siamo chi siamo!</p>'
+      status   'published'
+      type     'Cmsino::Content'
+
+for post
+      id        3 
+      umbrella  'home'
+      name      'railsconf2015'
+      locale    'us'
+      title     'Rails Conf 2015'
+      text      '<h1>Rails Conf</h1><h2>2015</h2><p>Looking forward!</p>'
+      excerpt   'The flagship event of the Ruby on Rails team members and community'
+
+      id        4
+      umbrella  'home'
+      name      'railsconf2015'
+      locale    'it'
+      title     'Rails Conf 2015'
+      text      '<h1>Rails Conf</h1><h2>2015</h2><p>Grande attesa!</p>'
+      excerpt   "L'evento di riferimento del Ruby on Rails team"
+
+
+
+

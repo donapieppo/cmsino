@@ -2,26 +2,11 @@ class Cmsino::ContentsController < ApplicationController
   layout 'cmsino/layouts/cmsino'
   authorize_resource :class => Cmsino::Content
 
-  def index
-    @contents = Hash.new
-    @locales = Cmsino::Conf.instance.locales
-    Cmsino::Content.order([:umbrella, :name, :locale]).each do |content|
-      @contents[content.umbrella] ||= Hash.new
-      @contents[content.umbrella][content.name] = Hash.new
-      @contents[content.umbrella][content.name][content.locale] = content
-    end
-    @last_edited = session[:cmsino_last]
-  end
-
   def new 
-    if params[:post]
-      @content = Cmsino::Post.new(umbrella: params[:umbrella], 
-                                  name:     params[:name],
-                                  locale:   params[:locale])
+    if params[:cmsino_post]
+      @content = Cmsino::Post.new(cmsino_content_params)
     else
-      @content = Cmsino::Content.new(umbrella: params[:umbrella], 
-                                     name:     params[:name],
-                                     locale:   params[:locale])
+      @content = Cmsino::Content.new(cmsino_content_params)
     end
 
     @all_locales = Cmsino::Content.where(umbrella: @content.umbrella, 

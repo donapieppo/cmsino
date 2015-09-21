@@ -2,40 +2,42 @@
 
 <% id = 0 %>  
 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-  <% @contents.each_key do |page| %>  
-    <% @contents[page].each_key do |name| %>  
-      <% div_id        = Cmsino::Content.div_id(page, name) %>  
+
+  <% @contents_hash.each_key do |umbrella| %>  
+    <% @contents_hash[umbrella].each_key do |name| %>
       <% id = id + 1 %>  
+      <% div_id = umbrella_div_id(umbrella) %>  
       <% in_class, aria_expanded = (@last_edited == div_id) ? ['in', 'true'] : ['', 'false'] %>
+
       <div class="panel panel-default">
         <div class="panel-heading" role="tab" id="heading<%= div_id %>">
           <h4 class="panel-title">
             <%# FIXME use some id or check security in page name %>
             <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse<%= id %>" aria-expanded="<%= aria_expanded %>" aria-controls="collapse<%= id %>">
-              pagina: <strong><%= Cmsino::Page.description(page) %></strong> > <strong><%= name %></strong>
+              <strong><%= umbrella %></strong> > <strong><%= name ? name : umbrella %></strong>
             </a>
           </h4>
         </div><!-- panel-heading -->
 
         <div id="collapse<%= id %>" class="panel-collapse collapse <%= in_class %>" role="tabpanel" aria-labelledby="heading<%= id %>">
           <div class="panel-body">
-            <% @locales.each do |locale| %>  
+            <% @all_locales.each do |locale| %>
+              <% content = @contents_hash[umbrella][name][locale] %>
               <span class="badge badge-info" style="width: 25px; text-align: center"><%= locale %></span>
-              <% if @contents[page][name][locale] %>  
-                <%= @contents[page][name][locale][:text] %>  
-              <% else %>  
-                -
-              <% end %>
-              <%= link_to icon(:pencil), @contents[page][name][locale] ? edit_cmsino_content_path(@contents[page][name][locale]) : new_cmsino_content_path(:page => page, :name => name, :locale => locale) %>
-              <% if @contents[page][name][locale] %>
-                <%= link_to icon(:trash), cmsino_content_path(@contents[page][name][locale]), :method => :delete %>
+              <%= content ? content.text : "-" %>  
+
+              <%= link_to icon(:pencil), content ? edit_cmsino_content_path(content) : new_cmsino_content_path(:cmsino_content => {umbrella: umbrella, name: name, locale: locale}) %>
+              <% if content %>
+                <%= link_to icon(:trash), cmsino_content_path(content), :method => :delete %>
               <% end %>
               <br/>
             <% end %>
           </div><!-- panel-body -->
         </div><!-- panel-collapse -->
       </div><!-- panel -->
-    <% end %><!-- name -->
-  <% end %><!-- page -->
-</div>
+
+    <% end %><!-- page -->
+  <%  end %><!-- umbrella -->
+
+</div><!-- panel-group -->
 

@@ -1,7 +1,8 @@
 module CmsinoHelper
+
   # in controller and view you have now @cmsino_page
-  def editable_page(name)
-    @cmsino_page = Cmsino::Page.new(name)
+  def editable_page(name, description = nil)
+    @cmsino_page = Cmsino::Page.new(name, description)
   end
 
   # display the current content. Eventually creates it if content with the
@@ -21,7 +22,7 @@ module CmsinoHelper
       visible_content = 'edit me' if visible_content.blank?
     end
 
-    raw %Q|<div #{editable_tags} id="#{content.div_id}"><div class="cmsino-help">Shift + click to edit</div>#{visible_content}</div>|
+    raw %Q|<div #{editable_tags} id="#{content.div_id}"><div class="cmsino-help">Double click to edit</div>#{visible_content}</div>|
   end
 
   def editable_image_content(name, page = nil)
@@ -35,7 +36,7 @@ module CmsinoHelper
 
   # POSTS
 
-  def editable_posts(name)
+  def editable_posts(name, description = nil)
     @cmsino_posts ||= Hash.new
     @cmsino_posts[name] = Cmsino::Post.where(umbrella: name).includes(:cmsino_media).order('date desc')
   end
@@ -67,5 +68,14 @@ module CmsinoHelper
       end
     end
   end
+
+  def umbrella_div_id(umbrella)
+    "umbrella_#{umbrella}"
+  end
+
+  def available_locales
+    @all_locales = Cmsino::Conf.instance.locales
+  end
+
 end
 
