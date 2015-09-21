@@ -158,6 +158,8 @@ end
 
 In the database the record will be
 
+Field    | Content                 | Where it comes from 
+---------|-------------------------|
 umbrella | home                    | from programmer
 name     | main                    | from programmer
 locale   | it                      | actual locale
