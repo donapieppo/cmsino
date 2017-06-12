@@ -1,4 +1,4 @@
-class CreateCmsinoContentSchema < ActiveRecord::Migration
+class CreateCmsinoContentSchema < ActiveRecord::Migration[5.0]
   def up
     # umbrella = :home 
     # name     = :index

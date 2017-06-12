@@ -1,4 +1,4 @@
-class CreateCmsinoTermSchema < ActiveRecord::Migration
+class CreateCmsinoTermSchema < ActiveRecord::Migration[5.0]
   def up
     create_table :cmsino_terms do |t|
       t.string   :name
