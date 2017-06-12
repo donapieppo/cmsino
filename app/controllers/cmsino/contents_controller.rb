@@ -30,7 +30,7 @@ class Cmsino::ContentsController < ApplicationController
   end
 
   def edit
-    session[:cmsino_from] = env["HTTP_REFERER"]
+    session[:cmsino_from] = request.env["HTTP_REFERER"]
     @content = Cmsino::Content.find(params[:id])
     @all_locales = Cmsino::Content.where(:umbrella => @content.umbrella, :name => @content.name)
   end
