@@ -2,13 +2,15 @@
 
 Ruby on rails gem (Rails Engine) for developers to add small cms capabilities to their application. Not usable now unless you want to **help** developing :-)
 
-Authorization is done with https://github.com/ryanb/cancan but easy to change.
+Authorization is done with 
+https://github.com/CanCanCommunity/cancancan
+but easy to change.
 
 ## Installation
 
 Add theses lines to your application's Gemfile:
 ```bash
-    gem 'cmsino', :git => 'git@github.com:donapieppo/cmsino.git'
+    gem 'cmsino', git: 'git@github.com:donapieppo/cmsino.git'
 ```
 
 And then execute:
@@ -32,7 +34,7 @@ for Rails Internationalization.
 ## Usage
 
 Include `CmsinoHelper` in `app/controllers/application_controller.rb` and
-for `CanCan` provide a `current_user` method in the controller and give 
+for `CanCanCan` provide a `current_user` method in the controller and give 
 ability to manage Cmsino::Content.
 
 For example in `app/controllers/application_controller.rb`
@@ -44,7 +46,7 @@ class ApplicationController < ActionController::Base
   include CmsinoHelper
 
   def current_user
-    User.new(:cmsino_user => session[:cmsino_user])
+    User.new(cmsino_user: session[:cmsino_user])
   end 
 end
 ```
@@ -101,7 +103,7 @@ When you visit /home for the first time the *content* named
 :main for the page :home and the locale "I18n.locale"
 is created in the database as an empty string.
 
-When authenticated (see cancan) you get an editable 
+When authenticated (see cancancan) you get an editable 
 form (a http://xing.github.io/wysihtml5 styled form for now).
 
 See https://github.com/donapieppo/cmsino/wiki/Usage for details
@@ -130,7 +132,11 @@ code.
 
 **Type field**
 
-Identifies Rails class: `Cmsino::Content`, `Cmsino::Post`
+Identifies Rails classes (see `app/models/`)
+
+  * `Cmsino::Page`
+  * `Cmsino::Post`
+  * `Cmsino::Medium`
 
 **Umbrella field**
 
@@ -140,10 +146,13 @@ Groups together contents (for example Cmsino::Content in the same page) or posts
 Example of umbrella: *'home'*, *'news'*, *'where_we_are'*
 
 **Name field**
+
+Defined in code with the param of `editable_page `.
+
 Records with the same umbrella and name identifies the same content with 
 different locales.
 
-Example of a content from code to database:
+Example of a page from code to database:
 
 ```ruby
 class WelcomeController < ApplicationController
@@ -152,7 +161,9 @@ class WelcomeController < ApplicationController
   end
 end
 ```
+
 `app/views/welcome/index.html.erb`
+
 ```ruby
 <p><%= editable_content(:contacts) %></p>
 ```
@@ -163,7 +174,34 @@ In the database the record will be
 Field    | Content                 | Where it comes from 
 ---------|-------------------------|---------------------------------
 umbrella | home                    | from programmer (in code)
-name     | main                    | from programmer (in code)
+name     | contacts                | from programmer (in code)
+locale   | it                      | actual locale
+title    | Selling contacts        | title submitted by csmino user
+text     | tel +3221222 <br/> ciao | content submitted by csmino user
+```
+Example of an image (media) from code to database:
+
+```ruby
+class WelcomeController < ApplicationController
+  def index
+    editable_page(:home, 'Home Page')
+  end
+end
+```
+
+`app/views/welcome/index.html.erb`
+
+```ruby
+<p><%= editable_content(:contacts) %></p>
+```
+
+In the database the record will be
+
+```
+Field    | Content                 | Where it comes from 
+---------|-------------------------|---------------------------------
+umbrella | home                    | from programmer (in code)
+name     | contacts                | from programmer (in code)
 locale   | it                      | actual locale
 title    | Selling contacts        | title submitted by csmino user
 text     | tel +3221222 <br/> ciao | content submitted by csmino user
