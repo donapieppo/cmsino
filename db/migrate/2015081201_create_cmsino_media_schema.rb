@@ -1,6 +1,7 @@
 class CreateCmsinoMediaSchema < ActiveRecord::Migration[5.0]
   def up
     create_table :cmsino_media do |t|
+      t.string   :umbrella
       t.string   :name
       t.text     :description
       t.string   :type
