@@ -4,3 +4,9 @@
   <%= medium.input :attach, as: :file %>
   <%= medium.submit %>
 <% end %>
+
+<p>
+<% if @medium.attach %>  
+  <%= image_tag @medium.attach.url(:medium) %>
+<% end %>
+</p>

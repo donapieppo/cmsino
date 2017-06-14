@@ -1,8 +1,8 @@
 class Cmsino::MediaController < ApplicationController
   layout 'cmsino/layouts/cmsino'
-  authorize_resource :class => Cmsino::Medium
+  authorize_resource class: Cmsino::Medium
 
-  before_action :get_media, only: [:edit, :update, :destroy]
+  before_action :get_medium, only: [:edit, :update, :destroy]
 
   def index
     @media = Cmsino::Medium.order(:name)
@@ -23,6 +23,14 @@ class Cmsino::MediaController < ApplicationController
     end
   end
 
+  def edit
+  end
+
+  def update
+    @medium.update_attributes(medium_params)
+    redirect_to edit_cmsino_medium_path(@medium)
+  end
+
   def destroy
     @media.destroy
     redirect_to cmsino_media_path
@@ -34,8 +42,8 @@ class Cmsino::MediaController < ApplicationController
     params[:cmsino_medium].permit(:name, :description, :attach)
   end
 
-  def get_media
-    @media = Cmsino::Medium.find(params[:id])
+  def get_medium
+    @medium = Cmsino::Medium.find(params[:id])
   end
 end
 
