@@ -5,8 +5,8 @@ class Cmsino::Medium < ActiveRecord::Base
   has_many :cmsino_contents, through: :cmsino_media_uses, class_name: "Cmsino::Content"
 
   has_attached_file :attach,
-                    :styles => { :medium => "300x300>", :thumb => "100x100>" } 
-  validates_attachment_content_type :attach, :content_type => /\Aimage\/.*\Z/
+                    styles: { medium: "300x300>", thumb: "100x100>" } 
+  validates_attachment_content_type :attach, content_type: /\Aimage\/.*\Z/
 
   validates_presence_of   :name 
   validates_uniqueness_of :name

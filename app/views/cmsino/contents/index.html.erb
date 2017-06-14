@@ -23,12 +23,12 @@
           <div class="panel-body">
             <% @all_locales.each do |locale| %>
               <% content = @contents_hash[umbrella][name][locale] %>
-              <span class="badge badge-info" style="width: 25px; text-align: center"><%= locale %></span>
+              <span class="label label-primary" style="display: block; width: 35px; text-align: center"><%= locale %></span>
               <%= content ? content.text : "-" %>  
 
-              <%= link_to icon(:pencil), content ? edit_cmsino_content_path(content) : new_cmsino_content_path(:cmsino_content => {umbrella: umbrella, name: name, locale: locale}) %>
+              <%= link_to icon(:pencil), content ? edit_cmsino_content_path(content) : new_cmsino_content_path(cmsino_content: {umbrella: umbrella, name: name, locale: locale}) %>
               <% if content %>
-                <%= link_to icon(:trash), cmsino_content_path(content), :method => :delete %>
+                <%= link_to icon(:trash), cmsino_content_path(content), method: :delete %>
               <% end %>
               <br/>
             <% end %>

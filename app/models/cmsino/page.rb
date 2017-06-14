@@ -9,11 +9,11 @@ class Cmsino::Page
   end
 
   def content(content_name, locale)
-    Cmsino::Content.find_or_create_by(:umbrella => @name, :name => content_name, :locale => validate_locale(locale))
+    Cmsino::Content.find_or_create_by(umbrella: self.name, name: content_name, locale: validate_locale(locale))
   end
 
-  def medium_content(content_name)
-    Cmsino::Medium.find_or_create_by(:umbrella => @name, :name => content_name)
+  def medium(content_name)
+    Cmsino::Medium.find_or_create_by(umbrella: self.name, name: content_name)
   end
 
   def validate_locale(locale)

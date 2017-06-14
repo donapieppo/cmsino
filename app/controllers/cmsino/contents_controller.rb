@@ -1,6 +1,6 @@
 class Cmsino::ContentsController < ApplicationController
   layout 'cmsino/layouts/cmsino'
-  authorize_resource :class => Cmsino::Content
+  authorize_resource class: Cmsino::Content
 
   def new 
     if params[:cmsino_post]

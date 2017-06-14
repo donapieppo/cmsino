@@ -22,16 +22,24 @@ module CmsinoHelper
       visible_content = 'edit me' if visible_content.blank?
     end
 
-    raw %Q|<div #{editable_tags} id="#{content.div_id}"><div class="cmsino-help">Double click to edit</div>#{visible_content}</div>|
+    raw %Q|<div #{editable_tags} id="#{content.div_id}">&nbsp;<div class="cmsino-help">Double click to edit</div>#{visible_content}</div>|
   end
 
-  def editable_image_content(name, page = nil)
+  def editable_image(name, page = nil)
     page = page ? Cmsino::Page.new(page) : @cmsino_page
     if ! page
       raise "FIXME trovare cmsino_page da snippet name quando possibile"
     end
-    image_content = page.image_content(name)
-    raw %Q|<h4>#{content.title}</h4>#{content.text}|
+    image = page.medium(name)
+
+    editable_tags = ''
+    if can?(:update, image) 
+      editable_tags = %Q|class="cmsino_editable" data-editor="#{edit_cmsino_medium_path(image)}"|
+    end
+
+    raw %Q|<div #{editable_tags} id="#{image.id}">&nbsp;<div class="cmsino-help">Double click to edit</div><img src="#{image.attach.url}"/></div>|
+    # link_to(image.name, edit_cmsino_medium_path(image)) +
+    # %Q|<img src="#{image.attach.url}"/><div class="cmsino-help">Double click to edit</div>#{visible_content}<div>|.html_safe
   end
 
   # POSTS
@@ -41,7 +49,7 @@ module CmsinoHelper
     @cmsino_posts[name] = Cmsino::Post.where(umbrella: name).includes(:cmsino_media).order('date desc')
   end
 
-  def icon(name, options = { :text => "", :size => "18" })
+  def icon(name, options = { text: "", size: "18" })
     raw "<i style=\"font-size: #{options[:size]}px\" class=\"fa fa-#{name}\"></i> #{options[:text]}"
   end
 
@@ -77,5 +85,8 @@ module CmsinoHelper
     @all_locales = Cmsino::Conf.instance.locales
   end
 
+  def icon(name, options = { text: "", size: "18" })
+    raw "<i style=\"font-size: #{options[:size]}px\" class=\"fa fa-#{name}\"></i> #{options[:text]}"
+  end
 end
 

@@ -8,5 +8,5 @@ $ ->
   )
   $(".cmsino_editable").dblclick( (event) ->
     url = $(this).attr('data-editor')
-    window.location =  url
+    window.location = url
   )
