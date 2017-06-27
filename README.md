@@ -33,7 +33,7 @@ for Rails Internationalization.
 
 ## Usage
 
-Include `CmsinoHelper` in `app/controllers/application_controller.rb` and
+Include `Cmsino::ControllerHelpers` in `app/controllers/application_controller.rb` and
 for `CanCanCan` provide a `current_user` method in the controller and give 
 ability to manage Cmsino::Content.
 
@@ -43,7 +43,7 @@ For example in `app/controllers/application_controller.rb`
 class ApplicationController < ActionController::Base
   [...]
 
-  include CmsinoHelper
+  include Cmsino::ControllerHelpers
 
   def current_user
     User.new(cmsino_user: session[:cmsino_user])
@@ -63,16 +63,16 @@ Of course in real cases you use something like
 https://github.com/plataformatec/devise to handle
 current_user
 
-Include cmsino/cmsino in your stylesheet and javascript
-assets: in `app/assets/stylesheets/application.css`
+Include cmsino/cmsino in your stylesheet and javascript assets: 
+
+`app/assets/stylesheets/application.css`
 ```css
   *= require cmsino/cmsino
 ```
-and in `app/assets/javascripts/application.js`
+`app/assets/javascripts/application.js`
 ```javascript
   //= require cmsino/cmsino
 ```
-
 
 If you want to provide editable content to `home#index`
 update the file `config/cmsino.yml` with 
@@ -152,19 +152,23 @@ Defined in code with the param of `editable_page `.
 Records with the same umbrella and name identifies the same content with 
 different locales.
 
-Example of a page from code to database:
+### From code to database:
+
+#### Content
+
+`app/controllers/home_controller.rb`
 
 ```ruby
-class WelcomeController < ApplicationController
+class HomeController < ApplicationController
   def index
     editable_page(:home, 'Home Page')
   end
 end
 ```
 
-`app/views/welcome/index.html.erb`
+`app/views/home/index.html.erb`
 
-```ruby
+```html
 <p><%= editable_content(:contacts) %></p>
 ```
 
@@ -179,33 +183,32 @@ locale   | it                      | actual locale
 title    | Selling contacts        | title submitted by csmino user
 text     | tel +3221222 <br/> ciao | content submitted by csmino user
 ```
+
+#### Media
+
 Example of an image (media) from code to database:
 
-```ruby
-class WelcomeController < ApplicationController
-  def index
-    editable_page(:home, 'Home Page')
-  end
-end
-```
-
 `app/views/welcome/index.html.erb`
 
 ```ruby
-<p><%= editable_content(:contacts) %></p>
+<p><%= selectable_image(:feature_image_for_contacts) %></p>
 ```
 
-In the database the record will be
+In the database the record will be represented by
+
+** cmsino_contents **
 
 ```
-Field    | Content                 | Where it comes from 
----------|-------------------------|---------------------------------
-umbrella | home                    | from programmer (in code)
-name     | contacts                | from programmer (in code)
-locale   | it                      | actual locale
-title    | Selling contacts        | title submitted by csmino user
-text     | tel +3221222 <br/> ciao | content submitted by csmino user
+Field    | Content                    | Where it comes from 
+---------|----------------------------|---------------------------------
+name     | feature_image_for_contacts | from programmer (in code)
+locale   | it                         | actual locale
 ```
+
+** cmsino_media_uses **
+
+association between feature_image_for_contacts contents and the
+media with the selected image.
 
 
 ## Contributing
