@@ -1,6 +1,6 @@
 class Cmsino::PagesController < Cmsino::ContentsController
   layout 'cmsino/layouts/cmsino'
-  authorize_resource :class => Cmsino::Content
+  authorize_resource class: Cmsino::Content
 
   before_action :available_locales
 

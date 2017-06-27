@@ -1,8 +1,34 @@
-<h1>
-  <%= t :media_libray %>
-  <small><%= "for #{@content.to_s}" if @content %></small>
-</h1>
+<% if @content %>  
+  <h1>Select media for <%= @content %></h1>
+  <% @actual_medium_ids = @content.cmsino_media.ids %>  
+<% else %>
+  <h1><%= t :media_libray %></h1>
+<% end %>
 
-<%= ul_media(@media, @content) %>  
+<div class="media_list">
+  <% @media.each do |medium| %>  
+    <%= link_to(@content ? toggle_cmsino_content_medium_path(@content, medium) : '#', method: :put, remote: true) do %>
+      <div class="thumbnail col-sm-6 col-md-4" data-mediumid="<%= medium.id %>">
+        <% if @content and @actual_medium_ids.include?(medium.id) %>
+          <i class='fa fa-check'></i>
+        <% else %>
+          <i class='fa fa-check' style="display: none"></i>
+        <% end %>
 
-<%= link_to icon('plus') + 'new medium', new_cmsino_medium_path %>  
+        <%= image_tag medium.attach.url(:medium) %>
+
+        <div class="caption">
+          <h4 class="media-heading"> <%= medium.name %> </h4>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>
+
+<%= link_to icon('plus-circle') + 'new medium', new_cmsino_medium_path, class: :button %>  
+
+<%= javascript_tag do %>  
+  $(".thumbnail").click(function(el) {
+    $(this).find('i').toggle();
+  });
+<% end %>

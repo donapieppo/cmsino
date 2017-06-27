@@ -2,6 +2,7 @@ require 'bootstrap-sass'
 require 'font-awesome-sass'
 require 'cmsino/version'
 require 'cmsino/conf'
+require 'cmsino/controller_helpers'
 require 'bootstrap-wysihtml5-rails'
 require 'bootstrap-datepicker-rails'
 require 'paperclip'
@@ -15,7 +16,7 @@ module Cmsino
 
     config.generators do |g|
       g.test_framework :rspec
-      g.fixture_replacement :factory_girl, :dir => 'spec/factories'
+      g.fixture_replacement :factory_girl, dir: 'spec/factories'
     end
   end
 end

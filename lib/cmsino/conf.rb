@@ -8,7 +8,7 @@ module Cmsino
     attr_accessor :pages
 
     def initialize
-      @locales = ['it']
+      @locales = ['it', 'en']
       # @pages = YAML.load_file(File.join(Rails.root, "config", "cmsino.yml"))
     end
 

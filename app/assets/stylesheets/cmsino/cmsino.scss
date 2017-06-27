@@ -1,3 +1,5 @@
+@import "bootstrap-wysihtml5/bootstrap3-wysihtml5";
+
 .cmsino_editable:hover {
   cursor: move; 
   background-color: #eff;
@@ -10,3 +12,13 @@
   background-color: yellow;
   z-index: 1001;
 }
+
+#cmsino_content_text {
+  height: 300px;
+}
+
+.button {
+  @extend .btn;
+  @extend .btn-primary;
+}
+

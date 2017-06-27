@@ -7,7 +7,7 @@ class Cmsino::Content < ActiveRecord::Base
   has_many :cmsino_media_uses, class_name: "Cmsino::MediaUse", foreign_key: "cmsino_content_id", dependent: :destroy
   has_many :cmsino_media, through: :cmsino_media_uses, class_name: "Cmsino::Medium"
 
-  validates_presence_of   :umbrella, :name, :locale
+  validates_presence_of   :name, :locale
   validates_uniqueness_of :name, scope: [:umbrella, :locale]
 
   def to_s

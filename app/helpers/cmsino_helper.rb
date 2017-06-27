@@ -1,8 +1,18 @@
 module CmsinoHelper
 
-  # in controller and view you have now @cmsino_page
-  def editable_page(name, description = nil)
-    @cmsino_page = Cmsino::Page.new(name, description)
+  def display_editable_content(content, edit_url)
+    text = (content and ! content.text.blank?) ? content.text : "edit me"
+
+    return text.html_safe unless edit_url
+
+    capture do 
+      content_tag(:div, class: 'cmsino_editable', data: { editor: edit_url }) do
+        "&nbsp;".html_safe +
+          content_tag(:div, class: 'cmsino-help') do
+          'Double click to edit'
+        end + text.html_safe
+      end
+    end
   end
 
   # display the current content. Eventually creates it if content with the
@@ -15,31 +25,39 @@ module CmsinoHelper
     end
     content = page.content(name, I18n.locale)
 
-    editable_tags = ''
-    visible_content = content.text
-    if can?(:update, content) 
-      editable_tags = %Q|class="cmsino_editable" data-editor="#{edit_cmsino_content_path(content)}"|
-      visible_content = 'edit me' if visible_content.blank?
-    end
+    edit_url = can?(:update, content) ? edit_cmsino_content_path(content) : nil
+    display_editable_content(content, edit_url)
 
-    raw %Q|<div #{editable_tags} id="#{content.div_id}">&nbsp;<div class="cmsino-help">Double click to edit</div>#{visible_content}</div>|
+    # editable_tags = ''
+    # visible_content = content.text
+    # if can?(:update, content) 
+    #   editable_tags = %Q|class="cmsino_editable" data-editor="#{edit_cmsino_content_path(content)}"|
+    #   visible_content = 'edit me' if visible_content.blank?
+    # end
+
+    # raw %Q|
+    #   <div #{editable_tags} id="#{content.div_id}">&nbsp;
+    #     <div class="cmsino-help">Double click to edit</div>
+    #     #{visible_content}
+    #   </div>|
   end
 
-  def editable_image(name, page = nil)
-    page = page ? Cmsino::Page.new(page) : @cmsino_page
-    if ! page
-      raise "FIXME trovare cmsino_page da snippet name quando possibile"
-    end
-    image = page.medium(name)
+  def selectable_image(name, style: '', cssclass: '' )
+    content = Cmsino::Content.find_or_create_by(name: name, locale: I18n.locale)
 
-    editable_tags = ''
-    if can?(:update, image) 
-      editable_tags = %Q|class="cmsino_editable" data-editor="#{edit_cmsino_medium_path(image)}"|
+    if can?(:update, content) 
+      editable_tags = %Q|class="cmsino_editable" data-editor="#{cmsino_content_media_path(content)}"|
     end
 
-    raw %Q|<div #{editable_tags} id="#{image.id}">&nbsp;<div class="cmsino-help">Double click to edit</div><img src="#{image.attach.url}"/></div>|
-    # link_to(image.name, edit_cmsino_medium_path(image)) +
-    # %Q|<img src="#{image.attach.url}"/><div class="cmsino-help">Double click to edit</div>#{visible_content}<div>|.html_safe
+    res = ''
+    content.cmsino_media.each do |medium|
+      res += %Q|
+        <div #{editable_tags} id="#{medium.id}">&nbsp;
+          <div class="cmsino-help">Double click to edit</div>
+          <img src="#{medium.attach.url}" style="#{style}" class="#{cssclass}"/>
+        </div>|
+    end
+    res.html_safe
   end
 
   # POSTS
@@ -60,18 +78,17 @@ module CmsinoHelper
   def ul_media(obj, content = nil)
     media = (obj.is_a? Cmsino::Content) ? obj.cmsino_media : obj # array of media
       
-    content_tag :ul, class: 'media-list' do
-      content_tag_for :li, media, class: 'media' do |media|
+    content_tag :ul, class: 'row' do
+      content_tag_for :li, media, class: 'thumbnail col-sm-6 col-md-4' do |media|
         delete_path = (obj.is_a? Cmsino::Content) ? (cmsino_media_use_path(obj.cmsino_media_uses.where(cmsino_medium_id: media.id).first)) : "#" 
 
-        content_tag(:div, class: "media-left") do
-          link_to image_tag(media.attach.url(:thumb)), "#", class: "media-object"
-        end <<
-        content_tag(:div, class: "media-body") do
+        image_tag(media.attach.url(:medium), height: 150) +
+
+        content_tag(:div, class: "caption") do
           content_tag(:h4,  class: "media-heading") { media.name } +
           content_tag(:p) { media.description } +
-          content_tag(:p) { link_to(icon(:trash), delete_path , method: :delete) unless content } +
-          content_tag(:p) { link_to(icon('plus'), new_cmsino_content_media_use_path(content, medium_id: media.id)) if content }
+          content_tag(:p) { link_to(icon('trash'), delete_path , method: :delete) unless content } +
+          content_tag(:p) { link_to(icon('plus'), new_cmsino_media_use_path(content, medium_id: media.id)) if content }
         end
       end
     end
@@ -81,12 +98,12 @@ module CmsinoHelper
     "umbrella_#{umbrella}"
   end
 
-  def available_locales
-    @all_locales = Cmsino::Conf.instance.locales
-  end
-
   def icon(name, options = { text: "", size: "18" })
     raw "<i style=\"font-size: #{options[:size]}px\" class=\"fa fa-#{name}\"></i> #{options[:text]}"
+  end
+
+  def cmsino_header
+    render partial: 'cmsino/layouts/cmsino_header'
   end
 end
 

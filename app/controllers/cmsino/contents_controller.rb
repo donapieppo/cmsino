@@ -1,5 +1,5 @@
 class Cmsino::ContentsController < ApplicationController
-  layout 'cmsino/layouts/cmsino'
+  layout false
   authorize_resource class: Cmsino::Content
 
   def new 
@@ -9,9 +9,9 @@ class Cmsino::ContentsController < ApplicationController
       @content = Cmsino::Content.new(cmsino_content_params)
     end
 
-    @all_locales = Cmsino::Content.where(umbrella: @content.umbrella, 
-                                         name:     @content.name)
-    render :action => :edit
+    @all_content_locales = Cmsino::Content.where(umbrella: @content.umbrella, 
+                                                 name:     @content.name)
+    render action: :edit
   end
 
   # "cmsino_content"=>{"umbrella"=>"page_name", "name"=>"content_name", "locale"=>"en", "text"=>"<p>my text</p>"}
@@ -32,7 +32,7 @@ class Cmsino::ContentsController < ApplicationController
   def edit
     session[:cmsino_from] = request.env["HTTP_REFERER"]
     @content = Cmsino::Content.find(params[:id])
-    @all_locales = Cmsino::Content.where(:umbrella => @content.umbrella, :name => @content.name)
+    @all_content_locales = Cmsino::Content.where(umbrella: @content.umbrella, name: @content.name)
   end
 
   def update

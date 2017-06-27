@@ -2,6 +2,7 @@
   <li><%= @content.umbrella %></li>
   <li><%= @content.name %></li>
   <li><%= @content.locale %></li>
+  <li><%= @content.id %></li>
 </ul>
 
 <%= simple_form_for @content do |content| %>  
@@ -17,24 +18,22 @@
   <%= content.submit %> 
 <% end %>
 
-<div class="row">
-  <% @all_locales.each do |content| %>
+<ul class="list-group">
+  <% @all_content_locales.each do |content| %>
     <% content == @content and next %>  
-    <div class="col-md-1">
-      <span class="badge badge-warning" style="width: 35px; text-align: center">
-        <% if content.locale != @content.locale %>
-          <%= link_to content.locale, edit_cmsino_content_path(content) %>
-        <% else %>
-          <%= content.locale %>
-        <% end %>
-      </span>
-      <%= link_to '<i class="icon icon-trash"></i>'.html_safe, cmsino_content_path(content), :method => :delete, :data => { :confirm => 'sure?' } unless content.locale == @content.locale %>
-    </div>
-    <div class="col-md-11">
-      <div class="alert alert-info"><%= content.text %></div>
-    </div>
+    <li class="list-group-item">
+      <p>
+        <strong><%= content.locale %></strong>
+        <%= link_to icon(:edit), edit_cmsino_content_path(content, locale: content.locale) %>
+        <%= link_to icon(:trash), cmsino_content_path(content), method: :delete, data: { confirm: 'sure?' } %>
+        <%= link_to icon(:copy), '#', id: 'copy-locale-content' %>
+      </p>
+      <div class="other_locale">
+        <%= content.text %>
+      </div>
+    </li>
   <% end %>
-</div>
+</ul>
 
 <%= ul_media(@content) %>  
 
@@ -42,7 +41,10 @@
   <%= link_to icon('camera') + 'add media', cmsino_content_media_path(@content), class: 'button' %>  
 <% end %>
 
-
-<!-- 
-bkLib.onDomLoaded(function() { nicEditors.allTextAreas({iconsPath : '<%= image_path('nicEditorIcons.gif') %>'}) });
--->
+<%= javascript_tag do %>  
+  $("#copy-locale-content").click(function(e) {
+    e.preventDefault();
+    var other_text = $(this).parent().parent().find(".other_locale").text();
+    $('#cmsino_content_text').data("wysihtml5").editor.setValue(other_text);
+  });
+<% end %>

@@ -2,7 +2,7 @@ class Cmsino::MediaController < ApplicationController
   layout 'cmsino/layouts/cmsino'
   authorize_resource class: Cmsino::Medium
 
-  before_action :get_medium, only: [:edit, :update, :destroy]
+  before_action :get_medium, only: [:edit, :update, :destroy, :toggle]
 
   def index
     @media = Cmsino::Medium.order(:name)
@@ -34,6 +34,16 @@ class Cmsino::MediaController < ApplicationController
   def destroy
     @media.destroy
     redirect_to cmsino_media_path
+  end
+
+  def toggle
+    @content = Cmsino::Content.find(params[:content_id])
+    if @content.cmsino_medium_ids.include?(@medium.id)
+      @content.cmsino_media.delete(@medium)
+    else
+      @content.cmsino_media << @medium
+    end
+    render json: 'ok'
   end
 
   private
