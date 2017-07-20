@@ -5,12 +5,17 @@ module CmsinoHelper
 
     return text.html_safe unless edit_url
 
+    # capture do 
+    #   content_tag(:div, class: 'cmsino_editable', data: { editor: edit_url }) do
+    #     "&nbsp;".html_safe +
+    #       content_tag(:div, class: 'cmsino-help') do
+    #       'Double click to edit'
+    #     end + text.html_safe
+    #   end
+    # end
     capture do 
-      content_tag(:div, class: 'cmsino_editable', data: { editor: edit_url }) do
-        "&nbsp;".html_safe +
-          content_tag(:div, class: 'cmsino-help') do
-          'Double click to edit'
-        end + text.html_safe
+      content_tag(:div, class: 'cmsino_editable', data: { editor: edit_url }, rel: 'popover') do
+        text.html_safe
       end
     end
   end
