@@ -23,14 +23,23 @@
           <div class="panel-body">
             <% @all_locales.each do |locale| %>
               <% content = @contents_hash[umbrella][name][locale] %>
-              <p>
-              <%= locale %>
-              <%= link_to icon(:pencil), content ? edit_cmsino_content_path(content) : new_cmsino_content_path(cmsino_content: {umbrella: umbrella, name: name, locale: locale}) %>
-              <% if content %>  
-                <%= link_to icon(:trash), cmsino_content_path(content), method: :delete %>
-                <%= display_editable_content(content, edit_cmsino_content_path(content)) %>  
-              <% end %>
-              </p>
+              <div class="row">
+                <div class="col-md-1">
+                  <p>
+                  <strong><%= locale %></strong>
+                  <% if content %>
+                    <%= link_to icon(:trash), cmsino_content_path(content), method: :delete %>
+                  <% else %>
+                    <%= link_to icon(:plus), new_cmsino_content_path(cmsino_content: {umbrella: umbrella, name: name, locale: locale}) %>
+                  <% end %>
+                  </p>
+                </div>
+                <div class="col-md-10">
+                  <% if content %>  
+                    <%= display_editable_content(content, edit_cmsino_content_path(content)) %>  
+                  <% end %>
+                </div>
+              </div>
             <% end %>
           </div><!-- panel-body -->
         </div><!-- panel-collapse -->
