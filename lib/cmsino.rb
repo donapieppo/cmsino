@@ -3,11 +3,9 @@ require 'font-awesome-sass'
 require 'cmsino/version'
 require 'cmsino/conf'
 require 'cmsino/controller_helpers'
-require 'bootstrap-wysihtml5-rails'
 require 'bootstrap-datepicker-rails'
-require 'paperclip'
 require 'simple_form'
-require 'cancan'
+require 'pundit'
 
 module Cmsino
   class Engine < Rails::Engine
