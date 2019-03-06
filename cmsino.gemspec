@@ -18,20 +18,25 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ["lib"]
 
-  spec.add_dependency "rails", "~> 5.1.1"
+  spec.add_dependency "rails", "~> 5.2.2"
 
-  spec.add_dependency 'cancancan'
+  spec.add_dependency 'mysql2'
+  spec.add_dependency 'sassc-rails'
+  spec.add_dependency 'bootsnap'
+  spec.add_dependency 'mini_magick'
+  spec.add_dependency 'pundit'
   spec.add_dependency 'simple_form'
   spec.add_dependency 'bootstrap-sass'
   spec.add_dependency 'font-awesome-sass'
-  spec.add_dependency 'sass-rails', '~> 5.0'
-  spec.add_dependency 'bootstrap-wysihtml5-rails'
-  spec.add_dependency 'bootstrap-datepicker-rails'
-  spec.add_dependency 'paperclip'
+  spec.add_dependency 'jquery-rails'
+
+  #spec.add_dependency 'bootstrap-wysihtml5-rails'
+  #spec.add_dependency 'bootstrap-datepicker-rails'
+  #spec.add_dependency 'paperclip'
   
-  spec.add_development_dependency 'rspec-rails'
-  spec.add_development_dependency 'factory_girl_rails'
-  spec.add_development_dependency 'database_cleaner'
+  # spec.add_development_dependency 'rspec-rails'
+  # spec.add_development_dependency 'factory_girl_rails'
+  # spec.add_development_dependency 'database_cleaner'
 
 end
 
