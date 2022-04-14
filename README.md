@@ -2,6 +2,8 @@
 
 Ruby on rails gem (Rails Engine) for developers to add small cms capabilities to their application. Not usable now unless you want to **help** developing :-)
 
+Old project. Not active.
+
 Authorization is done with 
 https://github.com/CanCanCommunity/cancancan
 but easy to change.
